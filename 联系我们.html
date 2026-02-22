@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>联系我们 — 【公司名称】</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    /* ================================================
+       联系我们页专属样式
+       ================================================ */
+
+    /* 主体双栏布局 */
+    .contact-layout {
+      display: grid; grid-template-columns: 5fr 7fr; gap: 6rem; align-items: start;
+    }
+
+    /* ——— 左侧：联系信息 ——— */
+    .contact-info-col {}
+
+    /* 联系项目 */
+    .contact-item { padding: 1.5rem 0; border-bottom: 1px solid rgba(201,168,76,0.1); }
+    .contact-item:first-child { padding-top: 0; }
+    .c-label { font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+    .c-value { font-size: 0.95rem; line-height: 1.7; color: var(--light); }
+    .c-value a { color: var(--light); transition: var(--transition); }
+    .c-value a:hover { color: var(--gold); }
+
+    /* 地图占位区域 */
+    /* 实际使用时替换为百度地图或高德地图的 iframe 嵌入代码 */
+    .map-placeholder {
+      margin-top: 2rem; aspect-ratio: 16/9;
+      background: var(--dark-3); border: 1px solid rgba(201,168,76,0.12);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .map-placeholder::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+    .map-text { text-align: center; position: relative; z-index: 1; }
+    .map-text p:first-child { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(201,168,76,0.4); margin-bottom: 0.5rem; }
+    .map-text p:last-child { font-size: 0.55rem; color: rgba(201,168,76,0.2); }
+
+    /* ——— 右侧：联系表单 ——— */
+    .contact-form-col {
+      background: var(--dark-3); border: 1px solid rgba(201,168,76,0.1); padding: 3rem;
+    }
+
+    .form-title { font-family: var(--serif); font-size: 1.5rem; color: var(--white); margin-bottom: 0.5rem; }
+    .form-subtitle { font-size: 0.82rem; color: var(--mid); margin-bottom: 2.5rem; line-height: 1.6; }
+
+    /* 双列表单项 */
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    /* 单选框组 */
+    .form-radio-group { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .radio-option {
+      display: flex; align-items: center; gap: 0.5rem; cursor: pointer;
+    }
+    .radio-option input { accent-color: var(--gold); }
+    .radio-option span { font-size: 0.8rem; color: rgba(245,240,232,0.6); }
+
+    /* 免责声明小字 */
+    .form-disclaimer { font-size: 0.7rem; color: rgba(245,240,232,0.25); line-height: 1.6; margin-top: 1rem; }
+
+    /* ——— 办公室信息条 ——— */
+    .offices-band { background: var(--dark-2); border-top: 1px solid rgba(201,168,76,0.1); padding: 5rem 4vw; margin: 0 -4vw; }
+    .offices-inner { max-width: 1200px; margin: 0 auto; }
+    .offices-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+    .office-card { padding: 2.5rem; border: 1px solid rgba(201,168,76,0.08); background: var(--dark-3); transition: var(--transition); }
+    .office-card:hover { border-color: rgba(201,168,76,0.2); }
+    .office-city { font-family: var(--serif); font-size: 1.3rem; color: var(--white); margin-bottom: 0.3rem; }
+    .office-type { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+    .office-detail { font-size: 0.82rem; line-height: 1.8; color: rgba(245,240,232,0.5); }
+
+    @media (max-width: 1024px) {
+      .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .offices-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .form-row { grid-template-columns: 1fr; }
+      .offices-grid { grid-template-columns: 1fr; }
+      .contact-form-col { padding: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="我的投资公司网站.html" onclick="toggleMenu()">首　页</a></li>
+      <li><a href="投资策略.html" onclick="toggleMenu()">投资策略</a></li>
+      <li><a href="关于我们.html" onclick="toggleMenu()">关于我们</a></li>
+      <li><a href="核心团队.html" onclick="toggleMenu()">核心团队</a></li>
+      <li><a href="联系我们.html" onclick="toggleMenu()">联系我们</a></li>
+      <li><a href="预约沟通.html" onclick="toggleMenu()">预约沟通</a></li>
+    </ul>
+  </nav>
+
+  <header class="navbar">
+    <a href="我的投资公司网站.html" class="logo">
+      <div class="logo-mark">汉</div>
+      <div class="logo-text">【公司名称】<span>CAPITAL MANAGEMENT</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="投资策略.html">投资策略</a></li>
+      <li><a href="关于我们.html">关于我们</a></li>
+      <li><a href="核心团队.html">核心团队</a></li>
+      <li><a href="联系我们.html" class="active">联系我们</a></li>
+    </ul>
+    <div style="display:flex;gap:1rem;align-items:center;">
+      <a href="预约沟通.html" class="nav-cta">预约沟通</a>
+      <div class="hamburger" onclick="toggleMenu()" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </header>
+
+  <!-- 页面顶部横幅 -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <p class="page-eyebrow">欢迎联系</p>
+      <h1 class="page-title">联系<em>我们</em></h1>
+      <!-- 【描述】请替换 -->
+      <p class="page-desc">无论您是有意向的投资者、战略合作伙伴，还是有意加入我们团队的优秀人才，我们期待与您展开对话。</p>
+    </div>
+  </section>
+
+  <div class="content-wrap">
+    <div class="contact-layout">
+
+      <!-- ================================================
+           左侧：联系信息
+           【请替换】所有联系方式为真实数据
+           ================================================ -->
+      <div class="contact-info-col reveal">
+
+        <div class="contact-item">
+          <div class="c-label">总部地址</div>
+          <!-- 【地址】请替换 -->
+          <div class="c-value">
+            【省市区】【街道名称】【楼宇名称】<br/>
+            【楼层及房号】　邮编：【000000】
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="c-label">总机电话</div>
+          <!-- 【电话】请替换 -->
+          <div class="c-value"><a href="tel:+86XXXXXXXXXX">+86 【区号】 【电话号码】</a></div>
+        </div>
+
+        <div class="contact-item">
+          <div class="c-label">综合邮箱</div>
+          <!-- 【邮箱】请替换 -->
+          <div class="c-value"><a href="mailto:info@example.com">【info@domain.com】</a></div>
+        </div>
+
+        <div class="contact-item">
+          <div class="c-label">投资者关系</div>
+          <!-- 【IR邮箱】请替换 -->
+          <div class="c-value"><a href="mailto:ir@example.com">【ir@domain.com】</a></div>
+        </div>
+
+        <div class="contact-item">
+          <div class="c-label">媒体查询</div>
+          <!-- 【媒体邮箱】请替换 -->
+          <div class="c-value"><a href="mailto:media@example.com">【media@domain.com】</a></div>
+        </div>
+
+        <div class="contact-item">
+          <div class="c-label">工作时间</div>
+          <div class="c-value">周一至周五　09:00 – 18:00（北京时间）</div>
+        </div>
+
+        <!-- ——— 地图嵌入区 ———
+             实际使用时，将下方 div 替换为百度地图嵌入代码：
+             <iframe src="https://map.baidu.com/..." width="100%" height="280" frameborder="0"></iframe>
+             或高德地图嵌入代码 -->
+        <div class="map-placeholder">
+          <div class="map-text">
+            <p>【 地 图 嵌 入 区 域 】</p>
+            <p>请替换为百度地图或高德地图 iframe</p>
+          </div>
+        </div>
+
+      </div><!-- /contact-info-col -->
+
+      <!-- ================================================
+           右侧：联系表单
+           【注意】表单提交需要后端服务或 Formspree 等第三方
+           替换 action 属性为您的表单处理地址
+           ================================================ -->
+      <div class="contact-form-col reveal">
+        <h2 class="form-title">发送咨询</h2>
+        <p class="form-subtitle">请填写以下信息，我们的团队将在 2 个工作日内与您取得联系。</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">姓名 *</label>
+            <input type="text" class="form-input" placeholder="您的姓名" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">公司名称</label>
+            <input type="text" class="form-input" placeholder="所在机构（可选）" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">电子邮箱 *</label>
+            <input type="email" class="form-input" placeholder="your@email.com" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">联系电话</label>
+            <input type="tel" class="form-input" placeholder="+86 138 0000 0000" />
+          </div>
+        </div>
+
+        <!-- 【咨询类型】可根据业务需要调整选项 -->
+        <div class="form-group">
+          <label class="form-label">咨询类型 *</label>
+          <div class="form-radio-group">
+            <label class="radio-option"><input type="radio" name="type" /><span>投资咨询</span></label>
+            <label class="radio-option"><input type="radio" name="type" /><span>合作洽谈</span></label>
+            <label class="radio-option"><input type="radio" name="type" /><span>媒体采访</span></label>
+            <label class="radio-option"><input type="radio" name="type" /><span>职位申请</span></label>
+            <label class="radio-option"><input type="radio" name="type" /><span>其他事项</span></label>
+          </div>
+        </div>
+
+        <!-- 【投资者类型】请根据业务需要调整 -->
+        <div class="form-group">
+          <label class="form-label">投资者身份</label>
+          <select class="form-select" style="color:rgba(245,240,232,0.5);">
+            <option value="">请选择（可选）</option>
+            <option>机构投资者</option>
+            <option>高净值个人</option>
+            <option>家族办公室</option>
+            <option>主权基金 / 养老金</option>
+            <option>非投资目的</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">咨询内容 *</label>
+          <textarea class="form-textarea" placeholder="请详细描述您的需求、问题或合作意向…"></textarea>
+        </div>
+
+        <!-- 提交按钮：请将 type="button" 改为 type="submit" 并配置表单 action -->
+        <button type="button" class="form-submit">提　交　咨　询</button>
+
+        <!-- 免责声明：请根据合规要求修改文字 -->
+        <p class="form-disclaimer">
+          提交表单即表示您同意我们的隐私政策，并允许我们就您的咨询事项与您取得联系。
+          本网站的任何内容均不构成投资建议或要约。
+        </p>
+      </div><!-- /contact-form-col -->
+
+    </div><!-- /contact-layout -->
+  </div><!-- /content-wrap -->
+
+  <!-- ================================================
+       办公室信息条
+       【请替换】各办公室城市、类型和地址
+       可根据实际办公室数量增减卡片
+       ================================================ -->
+  <div class="offices-band">
+    <div class="offices-inner">
+      <p class="section-eyebrow reveal">我们的办公室</p>
+      <h2 class="section-title reveal">全球<em>布局</em></h2>
+      <div class="offices-grid">
+
+        <!-- 【办公室一】请替换 -->
+        <div class="office-card reveal">
+          <div class="office-city">【城市一，例：上海】</div>
+          <!-- 【类型】例：总部 / 区域中心 / 代表处 -->
+          <div class="office-type">【总部 / 主办公室】</div>
+          <!-- 【详细地址和联系方式】请替换 -->
+          <div class="office-detail">
+            【省市区】【街道】【楼宇】<br/>
+            【楼层及房号】<br/><br/>
+            电话：+86 【电话】<br/>
+            邮箱：【邮箱】
+          </div>
+        </div>
+
+        <!-- 【办公室二】请替换 -->
+        <div class="office-card reveal reveal-delay-1">
+          <div class="office-city">【城市二，例：北京】</div>
+          <div class="office-type">【区域办公室】</div>
+          <div class="office-detail">
+            【省市区】【街道】【楼宇】<br/>
+            【楼层及房号】<br/><br/>
+            电话：+86 【电话】<br/>
+            邮箱：【邮箱】
+          </div>
+        </div>
+
+        <!-- 【办公室三】请替换，也可删除此块如只有两个办公室 -->
+        <div class="office-card reveal reveal-delay-2">
+          <div class="office-city">【城市三，例：香港】</div>
+          <div class="office-type">【海外联络处】</div>
+          <div class="office-detail">
+            【地址】<br/><br/>
+            电话：+852 【电话】<br/>
+            邮箱：【邮箱】
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo"><div class="footer-logo-mark">汉</div><div class="footer-logo-text">【公司名称】</div></div>
+          <p class="footer-desc">专注另类投资管理，以独立研究和价值驱动为核心。</p>
+          <div class="footer-social"><a href="#" class="social-icon">微</a><a href="#" class="social-icon">in</a><a href="#" class="social-icon">博</a></div>
+        </div>
+        <div><h4 class="footer-col-title">公　司</h4><ul class="footer-links"><li><a href="关于我们.html">关于我们</a></li><li><a href="核心团队.html">核心团队</a></li></ul></div>
+        <div><h4 class="footer-col-title">投　资</h4><ul class="footer-links"><li><a href="投资策略.html">投资策略</a></li></ul></div>
+        <div><h4 class="footer-col-title">联　络</h4><ul class="footer-links"><li><a href="联系我们.html">联系我们</a></li><li><a href="预约沟通.html">预约沟通</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 【年份】 【公司全称】. 保留所有权利</p>
+        <div class="footer-legal"><a href="#">法律声明</a><a href="#">隐私政策</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="shared.js"></script>
+</body>
+</html>

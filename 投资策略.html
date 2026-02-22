@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>投资策略 — 【公司名称】</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    /* ================================================
+       投资策略页专属样式
+       ================================================ */
+
+    /* 策略卡片大网格 */
+    .strategy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 4rem; }
+
+    /* 每张策略卡片 */
+    .strategy-card {
+      background: var(--dark-3); border: 1px solid rgba(201,168,76,0.08);
+      padding: 3rem 2.5rem; transition: var(--transition); position: relative; overflow: hidden;
+    }
+    .strategy-card::before {
+      content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px;
+      background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+    }
+    .strategy-card:hover { border-color: rgba(201,168,76,0.2); }
+    .strategy-card:hover::before { transform: scaleX(1); }
+
+    /* 策略图标占位 */
+    .s-icon { width: 50px; height: 50px; border: 1px solid rgba(201,168,76,0.3); display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; color: var(--gold); font-size: 1.4rem; }
+    .s-tag { font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
+    .s-name { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; color: var(--white); margin-bottom: 1.2rem; }
+    .s-desc { font-size: 0.85rem; line-height: 1.9; color: rgba(245,240,232,0.55); margin-bottom: 2rem; }
+
+    /* 策略特点列表 */
+    .s-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem; }
+    .s-features li { font-size: 0.78rem; color: rgba(245,240,232,0.5); display: flex; align-items: flex-start; gap: 0.7rem; }
+    .s-features li::before { content: '—'; color: var(--gold); flex-shrink: 0; }
+
+    /* 关键指标行 */
+    .s-metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; padding-top: 1.5rem; border-top: 1px solid rgba(201,168,76,0.1); }
+    .s-metric-val { font-family: var(--serif); font-size: 1.4rem; color: var(--gold); }
+    .s-metric-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); margin-top: 0.2rem; }
+
+    /* 策略详情展开提示 */
+    .s-more { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-top: 1.5rem; display: inline-flex; align-items: center; gap: 8px; }
+    .s-more::after { content: '→'; transition: transform 0.3s; }
+    .strategy-card:hover .s-more::after { transform: translateX(6px); }
+
+    /* 宽卡片（横向跨两列） */
+    .strategy-card.wide { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .strategy-card.wide .s-right { display: flex; flex-direction: column; justify-content: space-between; }
+
+    /* 底部 CTA 横幅 */
+    .cta-band { background: var(--dark-3); border: 1px solid rgba(201,168,76,0.12); padding: 5rem 4rem; text-align: center; margin-top: 4rem; position: relative; overflow: hidden; }
+    .cta-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(201,168,76,0.05) 0%, transparent 70%); }
+    .cta-band h2 { font-family: var(--serif); font-size: 2rem; color: var(--white); margin-bottom: 1rem; position: relative; }
+    .cta-band p { font-size: 0.9rem; color: var(--mid); margin-bottom: 2rem; position: relative; }
+    .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; }
+
+    @media (max-width: 1024px) {
+      .strategy-grid { grid-template-columns: 1fr 1fr; }
+      .strategy-card.wide { grid-column: span 2; }
+    }
+    @media (max-width: 768px) {
+      .strategy-grid { grid-template-columns: 1fr; }
+      .strategy-card.wide { grid-column: auto; grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 移动端菜单 -->
+  <nav class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="我的投资公司网站.html" onclick="toggleMenu()">首　页</a></li>
+      <li><a href="投资策略.html" onclick="toggleMenu()">投资策略</a></li>
+      <li><a href="关于我们.html" onclick="toggleMenu()">关于我们</a></li>
+      <li><a href="核心团队.html" onclick="toggleMenu()">核心团队</a></li>
+      <li><a href="联系我们.html" onclick="toggleMenu()">联系我们</a></li>
+      <li><a href="预约沟通.html" onclick="toggleMenu()">预约沟通</a></li>
+    </ul>
+  </nav>
+
+  <!-- 导航栏 -->
+  <header class="navbar">
+    <a href="我的投资公司网站.html" class="logo">
+      <div class="logo-mark">汉</div>
+      <div class="logo-text">【公司名称】<span>CAPITAL MANAGEMENT</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="投资策略.html" class="active">投资策略</a></li>
+      <li><a href="关于我们.html">关于我们</a></li>
+      <li><a href="核心团队.html">核心团队</a></li>
+      <li><a href="联系我们.html">联系我们</a></li>
+    </ul>
+    <div style="display:flex;gap:1rem;align-items:center;">
+      <a href="预约沟通.html" class="nav-cta">预约沟通</a>
+      <div class="hamburger" onclick="toggleMenu()" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </header>
+
+  <!-- ================================================
+       页面顶部英雄横幅
+       【请替换】标题和描述文字
+       ================================================ -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <p class="page-eyebrow">核心能力</p>
+      <h1 class="page-title">投资策略</h1>
+      <!-- 【描述】请替换为您对策略体系的一句话概括 -->
+      <p class="page-desc">我们构建了多元互补的投资策略体系，在控制下行风险的前提下，系统性捕捉市场定价错误所带来的超额收益机会。</p>
+    </div>
+  </section>
+
+  <!-- ================================================
+       策略卡片区
+       【请替换】每张卡片的策略名称、描述、特点和指标
+       可根据实际策略数量增减卡片
+       ================================================ -->
+  <div class="content-wrap">
+
+    <div class="strategy-grid">
+
+      <!-- ——— 策略一：私募股权 ——— -->
+      <!-- 【策略一】请替换所有【】内容 -->
+      <div class="strategy-card reveal">
+        <!-- 图标：可替换为 SVG 图标 -->
+        <div class="s-icon">◈</div>
+        <p class="s-tag">策略一</p>
+        <h2 class="s-name">私募股权</h2>
+        <!-- 【描述】请替换为该策略的详细说明，约80字 -->
+        <p class="s-desc">【请填写：描述该策略的投资聚焦领域、选标标准、创值路径以及典型持有期。例如：聚焦大消费、医疗健康、先进制造三大赛道，通过控股型并购和成长型投资，深度赋能被投企业的运营改善与战略升级，目标持有期3-5年……】</p>
+        <!-- 【特点列表】请替换为该策略的核心特点，3-5条 -->
+        <ul class="s-features">
+          <li>【特点一：例如"控股型并购为主，成长型跟投为辅"】</li>
+          <li>【特点二：例如"覆盖一级市场全阶段投资"】</li>
+          <li>【特点三：例如"自有运营团队深度参与被投公司管理"】</li>
+        </ul>
+        <!-- 【指标】请替换为真实数据或留为占位 -->
+        <div class="s-metrics">
+          <div><div class="s-metric-val">【X】x</div><div class="s-metric-label">目标投资回报倍数</div></div>
+          <div><div class="s-metric-val">【X】年</div><div class="s-metric-label">典型持有期限</div></div>
+        </div>
+        <div class="s-more">了解更多</div>
+      </div>
+
+      <!-- ——— 策略二：对冲基金 ——— -->
+      <!-- 【策略二】请替换所有【】内容 -->
+      <div class="strategy-card reveal reveal-delay-1">
+        <div class="s-icon">◇</div>
+        <p class="s-tag">策略二</p>
+        <h2 class="s-name">对冲基金</h2>
+        <p class="s-desc">【请填写：描述对冲策略的运作逻辑、多空机制、风控方法和流动性安排。例如：采用多空股票为基础的事件驱动策略，通过精选个股做多结合行业ETF对冲，在控制净敞口的条件下捕捉Alpha……】</p>
+        <ul class="s-features">
+          <li>【特点一：例如"多空平衡，净敞口控制在±30%以内"】</li>
+          <li>【特点二：例如"月度流动性，支持部分赎回"】</li>
+          <li>【特点三：例如"严格止损纪律，单笔最大亏损限额"】</li>
+        </ul>
+        <div class="s-metrics">
+          <div><div class="s-metric-val">【X】%</div><div class="s-metric-label">年化目标收益</div></div>
+          <div><div class="s-metric-val">【X】%</div><div class="s-metric-label">最大回撤控制目标</div></div>
+        </div>
+        <div class="s-more">了解更多</div>
+      </div>
+
+      <!-- ——— 策略三：不动产投资 ——— -->
+      <!-- 【策略三】请替换所有【】内容 -->
+      <div class="strategy-card reveal reveal-delay-2">
+        <div class="s-icon">◉</div>
+        <p class="s-tag">策略三</p>
+        <h2 class="s-name">不动产投资</h2>
+        <p class="s-desc">【请填写：不动产策略的地理覆盖、资产类型偏好和增值逻辑。例如：专注一二线城市核心地段的商业地产与物流地产，通过资产收购、运营优化及资本化退出的完整周期创造价值……】</p>
+        <ul class="s-features">
+          <li>【特点一：例如"以Core-Plus和增值型为主要策略"】</li>
+          <li>【特点二：例如"聚焦物流、办公及零售三类资产"】</li>
+          <li>【特点三：例如"优先考虑REITs化退出通道"】</li>
+        </ul>
+        <div class="s-metrics">
+          <div><div class="s-metric-val">【X】%</div><div class="s-metric-label">目标内部收益率（IRR）</div></div>
+          <div><div class="s-metric-val">【X】亿</div><div class="s-metric-label">当前管理资产规模</div></div>
+        </div>
+        <div class="s-more">了解更多</div>
+      </div>
+
+      <!-- ——— 策略四（宽卡，横跨两列）——— -->
+      <!-- 【策略四】适合旗舰策略或综合配置策略 -->
+      <div class="strategy-card wide reveal">
+        <div class="s-left">
+          <div class="s-icon">⊕</div>
+          <p class="s-tag">旗舰策略</p>
+          <h2 class="s-name">多资产综合配置</h2>
+          <p class="s-desc">【请填写：综合配置策略的核心逻辑，如何跨类别分散风险并寻求稳定的绝对收益。例如：通过动态配置私募股权、对冲基金、不动产及信用债四类资产，结合宏观周期研判灵活调整权重……约80-120字】</p>
+          <ul class="s-features">
+            <li>【特点一：例如"四类资产动态均衡配置"】</li>
+            <li>【特点二：例如"季度策略委员会审议资产权重"】</li>
+            <li>【特点三：例如"实物资产与金融资产双轮驱动"】</li>
+          </ul>
+          <div class="s-more" style="margin-top:1rem;">了解更多</div>
+        </div>
+        <div class="s-right">
+          <!-- 策略图示：可替换为真实图表或图片 -->
+          <div class="img-block" style="flex:1;min-height:280px;">
+            <div class="img-placeholder">
+              <p class="label">【 策 略 示 意 图 】</p>
+              <p class="hint">可放置资产配置饼图<br/>或策略框架示意图<br/>建议 SVG 格式</p>
+            </div>
+          </div>
+          <div class="s-metrics" style="margin-top:1.5rem;">
+            <div><div class="s-metric-val">【X】%</div><div class="s-metric-label">目标年化收益</div></div>
+            <div><div class="s-metric-val">【X】+</div><div class="s-metric-label">底层投资标的数量</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /strategy-grid -->
+
+    <!-- ================================================
+         底部行动召唤区
+         ================================================ -->
+    <div class="cta-band reveal">
+      <h2>希望了解适合您的策略？</h2>
+      <!-- 请替换文字 -->
+      <p>我们的投资顾问团队将根据您的目标和风险偏好，为您定制专属的配置方案。</p>
+      <div class="cta-actions">
+        <a href="预约沟通.html" class="btn-primary">预约沟通</a>
+        <a href="联系我们.html" class="btn-ghost">发送咨询</a>
+      </div>
+    </div>
+
+  </div><!-- /content-wrap -->
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo"><div class="footer-logo-mark">汉</div><div class="footer-logo-text">【公司名称】</div></div>
+          <p class="footer-desc">【公司名称】专注于另类投资管理，以独立研究和价值驱动为核心，为全球机构投资者和高净值客户创造稳健的长期回报。</p>
+          <div class="footer-social">
+            <a href="#" class="social-icon">微</a><a href="#" class="social-icon">in</a><a href="#" class="social-icon">博</a>
+          </div>
+        </div>
+        <div><h4 class="footer-col-title">公　司</h4><ul class="footer-links"><li><a href="关于我们.html">关于我们</a></li><li><a href="核心团队.html">核心团队</a></li></ul></div>
+        <div><h4 class="footer-col-title">投　资</h4><ul class="footer-links"><li><a href="投资策略.html">投资策略</a></li><li><a href="#">研究洞察</a></li></ul></div>
+        <div><h4 class="footer-col-title">联　络</h4><ul class="footer-links"><li><a href="联系我们.html">联系我们</a></li><li><a href="预约沟通.html">预约沟通</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 【年份】 【公司全称】. 保留所有权利</p>
+        <div class="footer-legal"><a href="#">法律声明</a><a href="#">隐私政策</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="shared.js"></script>
+</body>
+</html>

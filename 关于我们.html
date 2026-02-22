@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>关于我们 — 【公司名称】</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    /* ================================================
+       关于我们页专属样式
+       ================================================ */
+
+    /* ——— 公司故事：图文交错 ——— */
+    .story-block {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+      padding: 5rem 0; border-bottom: 1px solid rgba(201,168,76,0.08);
+    }
+    .story-block.reverse { direction: rtl; }
+    .story-block.reverse > * { direction: ltr; }
+    .story-img { aspect-ratio: 4/3; position: relative; }
+    .story-img .img-block { width: 100%; height: 100%; }
+    .story-img .corner-tl { position: absolute; top: -15px; left: -15px; width: 60px; height: 60px; border-left: 1.5px solid rgba(201,168,76,0.3); border-top: 1.5px solid rgba(201,168,76,0.3); }
+    .story-img .corner-br { position: absolute; bottom: -15px; right: -15px; width: 60px; height: 60px; border-right: 1.5px solid rgba(201,168,76,0.3); border-bottom: 1.5px solid rgba(201,168,76,0.3); }
+
+    /* ——— 时间线 ——— */
+    .timeline { padding: 6rem 0; }
+    .timeline-title { font-family: var(--serif); font-size: 2rem; color: var(--white); margin-bottom: 3rem; }
+    .timeline-items { position: relative; }
+    .timeline-items::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--gold), transparent); }
+    .tl-item { display: grid; grid-template-columns: 120px 1fr; gap: 2rem; padding: 2rem 0 2rem 2rem; position: relative; }
+    .tl-item::before { content: ''; position: absolute; left: -4px; top: 2.8rem; width: 9px; height: 9px; border-radius: 50%; background: var(--gold); border: 2px solid var(--dark); }
+    .tl-year { font-family: var(--serif); font-size: 1.5rem; color: var(--gold); line-height: 1; padding-top: 0.2rem; }
+    .tl-content h3 { font-family: var(--serif); font-size: 1.1rem; color: var(--white); margin-bottom: 0.5rem; }
+    .tl-content p { font-size: 0.85rem; line-height: 1.8; color: rgba(245,240,232,0.55); }
+
+    /* ——— 价值观 ——— */
+    .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 3rem; }
+    .value-card { background: var(--dark-3); padding: 2.5rem 2rem; border: 1px solid rgba(201,168,76,0.08); transition: var(--transition); }
+    .value-card:hover { border-color: rgba(201,168,76,0.25); }
+    .value-icon { font-size: 1.8rem; margin-bottom: 1.2rem; }
+    .value-name { font-family: var(--serif); font-size: 1.1rem; color: var(--white); margin-bottom: 0.8rem; }
+    .value-desc { font-size: 0.8rem; line-height: 1.7; color: rgba(245,240,232,0.5); }
+
+    /* ——— 数据展示 ——— */
+    .milestones { background: var(--dark-3); border-top: 1px solid rgba(201,168,76,0.1); border-bottom: 1px solid rgba(201,168,76,0.1); padding: 5rem 4vw; margin: 0 -4vw; }
+    .milestones .inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; text-align: center; }
+    .ms-num { font-family: var(--serif); font-size: 3.5rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
+    .ms-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); }
+
+    @media (max-width: 768px) {
+      .story-block { grid-template-columns: 1fr; gap: 2.5rem; }
+      .story-block.reverse { direction: ltr; }
+      .values-grid { grid-template-columns: 1fr 1fr; }
+      .milestones .inner { grid-template-columns: 1fr; gap: 2rem; }
+      .tl-item { grid-template-columns: 80px 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="我的投资公司网站.html" onclick="toggleMenu()">首　页</a></li>
+      <li><a href="投资策略.html" onclick="toggleMenu()">投资策略</a></li>
+      <li><a href="关于我们.html" onclick="toggleMenu()">关于我们</a></li>
+      <li><a href="核心团队.html" onclick="toggleMenu()">核心团队</a></li>
+      <li><a href="联系我们.html" onclick="toggleMenu()">联系我们</a></li>
+      <li><a href="预约沟通.html" onclick="toggleMenu()">预约沟通</a></li>
+    </ul>
+  </nav>
+
+  <header class="navbar">
+    <a href="我的投资公司网站.html" class="logo">
+      <div class="logo-mark">汉</div>
+      <div class="logo-text">【公司名称】<span>CAPITAL MANAGEMENT</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="投资策略.html">投资策略</a></li>
+      <li><a href="关于我们.html" class="active">关于我们</a></li>
+      <li><a href="核心团队.html">核心团队</a></li>
+      <li><a href="联系我们.html">联系我们</a></li>
+    </ul>
+    <div style="display:flex;gap:1rem;align-items:center;">
+      <a href="预约沟通.html" class="nav-cta">预约沟通</a>
+      <div class="hamburger" onclick="toggleMenu()" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </header>
+
+  <!-- ================================================
+       页面顶部横幅
+       【请替换】标题和描述
+       ================================================ -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <p class="page-eyebrow">我们的故事</p>
+      <h1 class="page-title">关于<em>我们</em></h1>
+      <!-- 【一句话介绍】请替换 -->
+      <p class="page-desc">自【成立年份】年创立至今，【公司名称】始终坚守独立研究与价值驱动的投资理念，在复杂多变的市场环境中寻找确定性的长期回报。</p>
+    </div>
+  </section>
+
+  <div class="content-wrap">
+
+    <!-- ================================================
+         公司故事：图文交错区块
+         【请替换】图片和文字内容
+         ================================================ -->
+    <div class="story-block reveal">
+      <div class="story-img">
+        <div class="img-block" style="width:100%;height:100%;">
+          <!--
+            替换为：<img src="【图片路径】" alt="公司图片" style="width:100%;height:100%;object-fit:cover;" />
+          -->
+          <div class="img-placeholder">
+            <p class="label">【 创 始 故 事 图 片 】</p>
+            <p class="hint">建议：早期办公室或创始团队合影<br/>推荐 800×600px</p>
+          </div>
+        </div>
+        <div class="corner-tl"></div><div class="corner-br"></div>
+      </div>
+      <div>
+        <p class="section-eyebrow">公司起源</p>
+        <!-- 【标题】请替换 -->
+        <h2 class="section-title">始于<em>一个信念</em></h2>
+        <div class="gold-divider"></div>
+        <!-- 【正文】请替换为公司创立故事，约120字 -->
+        <p class="section-body">【请填写：公司的创立背景和起源故事。例如：【公司名称】由【创始人姓名】于【年份】年在【城市】创立。彼时，中国另类资产市场刚刚起步……创始团队坚信，系统性的研究能力与严格的风险纪律，是穿越市场周期的根本。】</p>
+        <p class="section-body">【请填写：公司发展中的关键转折或里程碑，约80字。例如：历经【X】年的深耕，公司在【重要时间节点】实现了【关键成就】……】</p>
+      </div>
+    </div>
+
+    <div class="story-block reverse reveal">
+      <div class="story-img">
+        <div class="img-block" style="width:100%;height:100%;">
+          <div class="img-placeholder">
+            <p class="label">【 投 资 哲 学 图 片 】</p>
+            <p class="hint">建议：团队会议室或研究场景<br/>推荐 800×600px</p>
+          </div>
+        </div>
+        <div class="corner-tl"></div><div class="corner-br"></div>
+      </div>
+      <div>
+        <p class="section-eyebrow">投资哲学</p>
+        <!-- 【标题】请替换 -->
+        <h2 class="section-title">独立思考<br/><em>价值驱动</em></h2>
+        <div class="gold-divider"></div>
+        <!-- 【正文】请替换为投资哲学说明，约120字 -->
+        <p class="section-body">【请填写：公司的核心投资哲学，包括如何看待市场效率、信息优势和风险管理。约120字。例如：我们相信，大多数市场定价错误源于信息不对称和投资者行为偏差。通过构建独立的研究体系……】</p>
+        <p class="section-body">【请填写：补充说明风险管理理念，约60字。】</p>
+      </div>
+    </div>
+
+    <!-- ================================================
+         关键数据里程碑
+         【请替换】三项核心数据
+         ================================================ -->
+    <div class="milestones reveal">
+      <div class="inner">
+        <div>
+          <div class="ms-num">【X】亿+</div>
+          <!-- 【指标一】请替换 -->
+          <div class="ms-label">历史累计管理规模（人民币）</div>
+        </div>
+        <div>
+          <div class="ms-num">【X】%</div>
+          <!-- 【指标二】请替换 -->
+          <div class="ms-label">旗舰基金成立以来年化净回报</div>
+        </div>
+        <div>
+          <div class="ms-num">【X】+</div>
+          <!-- 【指标三】请替换 -->
+          <div class="ms-label">服务机构投资者数量</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================
+         公司发展时间线
+         【请替换】年份、标题和事件描述
+         ================================================ -->
+    <div class="timeline">
+      <h2 class="timeline-title reveal">发展<em style="font-style:italic;color:var(--gold-light);font-weight:300;">历程</em></h2>
+      <div class="timeline-items">
+
+        <!-- 时间节点一：请替换 -->
+        <div class="tl-item reveal">
+          <div class="tl-year">【年份】</div>
+          <div class="tl-content">
+            <h3>【里程碑标题，例：公司创立】</h3>
+            <p>【请填写：该年份发生的关键事件描述，约50字。例如：【创始人】在【城市】创立公司，初始团队【X】人，完成首只基金募集，管理规模【金额】……】</p>
+          </div>
+        </div>
+
+        <!-- 时间节点二 -->
+        <div class="tl-item reveal reveal-delay-1">
+          <div class="tl-year">【年份】</div>
+          <div class="tl-content">
+            <h3>【里程碑标题，例：战略扩张】</h3>
+            <p>【请填写：该年份发生的关键事件，约50字。】</p>
+          </div>
+        </div>
+
+        <!-- 时间节点三 -->
+        <div class="tl-item reveal reveal-delay-2">
+          <div class="tl-year">【年份】</div>
+          <div class="tl-content">
+            <h3>【里程碑标题，例：规模突破】</h3>
+            <p>【请填写：该年份发生的关键事件，约50字。】</p>
+          </div>
+        </div>
+
+        <!-- 时间节点四 -->
+        <div class="tl-item reveal reveal-delay-3">
+          <div class="tl-year">【年份】</div>
+          <div class="tl-content">
+            <h3>【里程碑标题，例：当前阶段】</h3>
+            <p>【请填写：当前阶段的战略方向或最新成就，约50字。】</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ================================================
+         核心价值观
+         【请替换】四项价值观的图标、名称和描述
+         ================================================ -->
+    <div style="padding-bottom: 2rem;">
+      <p class="section-eyebrow reveal">我们的价值观</p>
+      <h2 class="section-title reveal">驱动我们前行的<em>核心信念</em></h2>
+      <div class="values-grid">
+
+        <!-- 【价值观一】请替换 -->
+        <div class="value-card reveal">
+          <!-- 图标：可替换为 SVG 或 emoji -->
+          <div class="value-icon">◈</div>
+          <h3 class="value-name">【价值观名称，例：诚信为本】</h3>
+          <p class="value-desc">【请填写：该价值观的具体含义和在公司文化中的体现，约40字。】</p>
+        </div>
+
+        <!-- 【价值观二】请替换 -->
+        <div class="value-card reveal reveal-delay-1">
+          <div class="value-icon">◇</div>
+          <h3 class="value-name">【价值观名称，例：独立思考】</h3>
+          <p class="value-desc">【请填写：约40字描述。】</p>
+        </div>
+
+        <!-- 【价值观三】请替换 -->
+        <div class="value-card reveal reveal-delay-2">
+          <div class="value-icon">◉</div>
+          <h3 class="value-name">【价值观名称，例：长期主义】</h3>
+          <p class="value-desc">【请填写：约40字描述。】</p>
+        </div>
+
+        <!-- 【价值观四】请替换 -->
+        <div class="value-card reveal reveal-delay-3">
+          <div class="value-icon">⊕</div>
+          <h3 class="value-name">【价值观名称，例：卓越精进】</h3>
+          <p class="value-desc">【请填写：约40字描述。】</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /content-wrap -->
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo"><div class="footer-logo-mark">汉</div><div class="footer-logo-text">【公司名称】</div></div>
+          <p class="footer-desc">专注另类投资管理，以独立研究和价值驱动为核心，为全球投资者创造稳健长期回报。</p>
+          <div class="footer-social"><a href="#" class="social-icon">微</a><a href="#" class="social-icon">in</a><a href="#" class="social-icon">博</a></div>
+        </div>
+        <div><h4 class="footer-col-title">公　司</h4><ul class="footer-links"><li><a href="关于我们.html">关于我们</a></li><li><a href="核心团队.html">核心团队</a></li></ul></div>
+        <div><h4 class="footer-col-title">投　资</h4><ul class="footer-links"><li><a href="投资策略.html">投资策略</a></li><li><a href="#">研究洞察</a></li></ul></div>
+        <div><h4 class="footer-col-title">联　络</h4><ul class="footer-links"><li><a href="联系我们.html">联系我们</a></li><li><a href="预约沟通.html">预约沟通</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 【年份】 【公司全称】. 保留所有权利</p>
+        <div class="footer-legal"><a href="#">法律声明</a><a href="#">隐私政策</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>核心团队 — 【公司名称】</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    /* ================================================
+       核心团队页专属样式
+       ================================================ */
+
+    /* 团队分组标题 */
+    .team-group { margin-bottom: 5rem; }
+    .group-label { font-size: 0.62rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); margin-bottom: 2.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(201,168,76,0.12); }
+
+    /* 团队成员网格 */
+    .members-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+    .members-grid.senior { grid-template-columns: repeat(3, 1fr); }
+
+    /* 成员卡片 */
+    .member-card { cursor: pointer; }
+
+    /* 【头像容器】请为每位成员填入头像图片 */
+    .member-avatar {
+      width: 100%; aspect-ratio: 3/4;
+      background: var(--dark-3); border: 1px solid rgba(201,168,76,0.1);
+      margin-bottom: 1.2rem; position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition);
+    }
+    .member-avatar:hover { border-color: rgba(201,168,76,0.3); }
+
+    /* 悬停叠加层，显示简介 */
+    .member-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.2) 60%, transparent 100%);
+      opacity: 0; transition: var(--transition);
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem;
+    }
+    .member-card:hover .member-overlay { opacity: 1; }
+
+    /* 悬停时显示的简介文字 */
+    .member-bio-short { font-size: 0.75rem; line-height: 1.6; color: rgba(245,240,232,0.8); }
+
+    /* 头像占位符 */
+    .avatar-initial {
+      font-family: var(--serif); font-size: 2.5rem; font-weight: 300;
+      color: rgba(201,168,76,0.2); position: relative; z-index: 1;
+    }
+
+    /* 姓名与职位 */
+    .member-name { font-family: var(--serif); font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 0.25rem; }
+    .member-title { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+    .member-edu { font-size: 0.72rem; color: var(--mid); }
+
+    /* 领英图标 */
+    .member-linkedin {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.62rem; letter-spacing: 0.15em; color: rgba(201,168,76,0.6);
+      margin-top: 0.5rem; transition: var(--transition);
+    }
+    .member-linkedin:hover { color: var(--gold); }
+
+    /* 高级合伙人展示（大图横幅） */
+    .senior-member {
+      display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: start;
+      padding: 3rem; background: var(--dark-3); border: 1px solid rgba(201,168,76,0.1);
+      margin-bottom: 1.5px; transition: var(--transition);
+    }
+    .senior-member:hover { border-color: rgba(201,168,76,0.25); }
+    .senior-avatar {
+      aspect-ratio: 3/4; background: var(--dark-2); border: 1px solid rgba(201,168,76,0.1);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .senior-initial { font-family: var(--serif); font-size: 3rem; font-weight: 300; color: rgba(201,168,76,0.2); }
+    .senior-name { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; color: var(--white); margin-bottom: 0.3rem; }
+    .senior-title { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+    .senior-bio { font-size: 0.85rem; line-height: 1.9; color: rgba(245,240,232,0.6); margin-bottom: 1.2rem; }
+    .senior-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+    .tag { font-size: 0.62rem; letter-spacing: 0.15em; padding: 4px 12px; border: 1px solid rgba(201,168,76,0.2); color: var(--mid); }
+
+    @media (max-width: 1024px) {
+      .members-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .members-grid, .members-grid.senior { grid-template-columns: repeat(2, 1fr); }
+      .senior-member { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="我的投资公司网站.html" onclick="toggleMenu()">首　页</a></li>
+      <li><a href="投资策略.html" onclick="toggleMenu()">投资策略</a></li>
+      <li><a href="关于我们.html" onclick="toggleMenu()">关于我们</a></li>
+      <li><a href="核心团队.html" onclick="toggleMenu()">核心团队</a></li>
+      <li><a href="联系我们.html" onclick="toggleMenu()">联系我们</a></li>
+      <li><a href="预约沟通.html" onclick="toggleMenu()">预约沟通</a></li>
+    </ul>
+  </nav>
+
+  <header class="navbar">
+    <a href="我的投资公司网站.html" class="logo">
+      <div class="logo-mark">汉</div>
+      <div class="logo-text">【公司名称】<span>CAPITAL MANAGEMENT</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="投资策略.html">投资策略</a></li>
+      <li><a href="关于我们.html">关于我们</a></li>
+      <li><a href="核心团队.html" class="active">核心团队</a></li>
+      <li><a href="联系我们.html">联系我们</a></li>
+    </ul>
+    <div style="display:flex;gap:1rem;align-items:center;">
+      <a href="预约沟通.html" class="nav-cta">预约沟通</a>
+      <div class="hamburger" onclick="toggleMenu()" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </header>
+
+  <!-- 页面顶部横幅 -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <p class="page-eyebrow">人才是核心竞争力</p>
+      <h1 class="page-title">核心<em>团队</em></h1>
+      <!-- 【描述】请替换 -->
+      <p class="page-desc">我们的团队由来自顶级投行、基金及咨询机构的资深专业人士组成，平均从业年限逾【X】年，拥有横跨多个资产类别和市场周期的丰富经验。</p>
+    </div>
+  </section>
+
+  <div class="content-wrap">
+
+    <!-- ================================================
+         合伙人级别（大图展示）
+         【请替换】每位合伙人的姓名、职位、简历和专长标签
+         【请填入】头像图片
+         ================================================ -->
+    <div class="team-group">
+      <div class="group-label reveal">管理合伙人</div>
+
+      <!-- ——— 合伙人一 ——— -->
+      <div class="senior-member reveal">
+        <div class="senior-avatar">
+          <!--
+            替换为：<img src="【头像路径】" alt="【姓名】" style="width:100%;height:100%;object-fit:cover;" />
+          -->
+          <div class="senior-initial">姓</div>
+        </div>
+        <div>
+          <!-- 【姓名和职位】请替换 -->
+          <h2 class="senior-name">【合伙人姓名一】</h2>
+          <div class="senior-title">创始合伙人 & 首席执行官</div>
+          <!-- 【简历】请替换，约150字，包含教育背景、历任职位、专业成就 -->
+          <p class="senior-bio">【请填写：该合伙人的详细简历。包括教育背景（毕业院校和专业）、过往任职机构（如高盛、摩根士丹利、知名PE机构等）、核心投资业绩或成就。例如：拥有超过【X】年的另类投资经验，曾先后就职于【机构A】和【机构B】……在主导了【X】次成功的跨境并购交易……持有【CFA/CFP/MBA等资质】……】</p>
+          <p class="senior-bio">【请填写：第二段，约50字，说明其专长领域和投资理念。】</p>
+          <!-- 【专长标签】请替换为实际专长 -->
+          <div class="senior-tags">
+            <span class="tag">【专长一，例：跨境并购】</span>
+            <span class="tag">【专长二，例：消费赛道】</span>
+            <span class="tag">【专长三，例：上市公司重组】</span>
+            <span class="tag">【专长四，例：基金结构设计】</span>
+          </div>
+          <!-- 领英链接：请替换 href -->
+          <a href="#" class="member-linkedin" target="_blank">▶ LinkedIn 主页</a>
+        </div>
+      </div>
+
+      <!-- ——— 合伙人二 ——— -->
+      <div class="senior-member reveal">
+        <div class="senior-avatar">
+          <div class="senior-initial">姓</div>
+        </div>
+        <div>
+          <h2 class="senior-name">【合伙人姓名二】</h2>
+          <div class="senior-title">合伙人 & 首席投资官</div>
+          <p class="senior-bio">【请填写：该合伙人的简历，格式同上，约150字。】</p>
+          <p class="senior-bio">【请填写：第二段，约50字。】</p>
+          <div class="senior-tags">
+            <span class="tag">【专长一】</span>
+            <span class="tag">【专长二】</span>
+            <span class="tag">【专长三】</span>
+          </div>
+          <a href="#" class="member-linkedin" target="_blank">▶ LinkedIn 主页</a>
+        </div>
+      </div>
+
+    </div><!-- /合伙人 -->
+
+    <!-- ================================================
+         投资团队（小卡片网格）
+         【请替换】每位成员的姓名、职位、头像和简介
+         可根据实际人数增减卡片
+         ================================================ -->
+    <div class="team-group">
+      <div class="group-label reveal">投资团队</div>
+      <div class="members-grid">
+
+        <!-- 成员卡：请复制此块并填写每位成员信息 -->
+        <div class="member-card reveal">
+          <div class="member-avatar">
+            <!--
+              替换为：<img src="【头像路径】" alt="【姓名】" style="width:100%;height:100%;object-fit:cover;" />
+            -->
+            <div class="avatar-initial">姓</div>
+            <div class="member-overlay">
+              <!-- 【悬停简介】请替换，约30字 -->
+              <p class="member-bio-short">【请填写：简短专业背景，如"前高盛TMT行业分析师，覆盖消费互联网领域逾8年"】</p>
+            </div>
+          </div>
+          <!-- 【姓名】请替换 -->
+          <div class="member-name">【姓名】</div>
+          <!-- 【职位】请替换 -->
+          <div class="member-title">【职位，例：董事总经理】</div>
+          <!-- 【教育背景】请替换 -->
+          <div class="member-edu">【学历，例：哈佛商学院 MBA】</div>
+          <a href="#" class="member-linkedin" target="_blank">LinkedIn</a>
+        </div>
+
+        <!-- 成员卡二 -->
+        <div class="member-card reveal reveal-delay-1">
+          <div class="member-avatar">
+            <div class="avatar-initial">姓</div>
+            <div class="member-overlay"><p class="member-bio-short">【请填写：悬停简介，约30字】</p></div>
+          </div>
+          <div class="member-name">【姓名】</div>
+          <div class="member-title">【职位】</div>
+          <div class="member-edu">【学历】</div>
+          <a href="#" class="member-linkedin" target="_blank">LinkedIn</a>
+        </div>
+
+        <!-- 成员卡三 -->
+        <div class="member-card reveal reveal-delay-2">
+          <div class="member-avatar">
+            <div class="avatar-initial">姓</div>
+            <div class="member-overlay"><p class="member-bio-short">【请填写：悬停简介，约30字】</p></div>
+          </div>
+          <div class="member-name">【姓名】</div>
+          <div class="member-title">【职位】</div>
+          <div class="member-edu">【学历】</div>
+          <a href="#" class="member-linkedin" target="_blank">LinkedIn</a>
+        </div>
+
+        <!-- 成员卡四 -->
+        <div class="member-card reveal reveal-delay-3">
+          <div class="member-avatar">
+            <div class="avatar-initial">姓</div>
+            <div class="member-overlay"><p class="member-bio-short">【请填写：悬停简介，约30字】</p></div>
+          </div>
+          <div class="member-name">【姓名】</div>
+          <div class="member-title">【职位】</div>
+          <div class="member-edu">【学历】</div>
+          <a href="#" class="member-linkedin" target="_blank">LinkedIn</a>
+        </div>
+
+      </div>
+    </div><!-- /投资团队 -->
+
+    <!-- ================================================
+         运营与支持团队
+         ================================================ -->
+    <div class="team-group">
+      <div class="group-label reveal">运营与支持</div>
+      <div class="members-grid">
+
+        <div class="member-card reveal">
+          <div class="member-avatar">
+            <div class="avatar-initial">姓</div>
+            <div class="member-overlay"><p class="member-bio-short">【请填写：简介】</p></div>
+          </div>
+          <div class="member-name">【姓名】</div>
+          <div class="member-title">首席财务官</div>
+          <div class="member-edu">【学历】</div>
+        </div>
+
+        <div class="member-card reveal reveal-delay-1">
+          <div class="member-avatar">
+            <div class="avatar-initial">姓</div>
+            <div class="member-overlay"><p class="member-bio-short">【请填写：简介】</p></div>
+          </div>
+          <div class="member-name">【姓名】</div>
+          <div class="member-title">首席风险官</div>
+          <div class="member-edu">【学历】</div>
+        </div>
+
+        <div class="member-card reveal reveal-delay-2">
+          <div class="member-avatar">
+            <div class="avatar-initial">姓</div>
+            <div class="member-overlay"><p class="member-bio-short">【请填写：简介】</p></div>
+          </div>
+          <div class="member-name">【姓名】</div>
+          <div class="member-title">首席合规官</div>
+          <div class="member-edu">【学历】</div>
+        </div>
+
+        <div class="member-card reveal reveal-delay-3">
+          <div class="member-avatar">
+            <div class="avatar-initial">姓</div>
+            <div class="member-overlay"><p class="member-bio-short">【请填写：简介】</p></div>
+          </div>
+          <div class="member-name">【姓名】</div>
+          <div class="member-title">投资者关系总监</div>
+          <div class="member-edu">【学历】</div>
+        </div>
+
+      </div>
+    </div><!-- /运营团队 -->
+
+    <!-- 职位招募 CTA -->
+    <div style="text-align:center;padding:4rem 0 2rem;border-top:1px solid rgba(201,168,76,0.1);" class="reveal">
+      <p class="section-eyebrow" style="margin-bottom:1rem;">加入我们</p>
+      <h2 class="section-title" style="margin-bottom:1rem;">与顶尖人才共同<em>创造卓越</em></h2>
+      <p style="font-size:0.9rem;color:var(--mid);margin-bottom:2rem;">我们始终在寻找兼具卓越分析能力与长期主义精神的优秀人才。</p>
+      <a href="联系我们.html" class="btn-primary">查看职位机会</a>
+    </div>
+
+  </div><!-- /content-wrap -->
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo"><div class="footer-logo-mark">汉</div><div class="footer-logo-text">【公司名称】</div></div>
+          <p class="footer-desc">专注另类投资管理，以独立研究和价值驱动为核心。</p>
+          <div class="footer-social"><a href="#" class="social-icon">微</a><a href="#" class="social-icon">in</a><a href="#" class="social-icon">博</a></div>
+        </div>
+        <div><h4 class="footer-col-title">公　司</h4><ul class="footer-links"><li><a href="关于我们.html">关于我们</a></li><li><a href="核心团队.html">核心团队</a></li></ul></div>
+        <div><h4 class="footer-col-title">投　资</h4><ul class="footer-links"><li><a href="投资策略.html">投资策略</a></li></ul></div>
+        <div><h4 class="footer-col-title">联　络</h4><ul class="footer-links"><li><a href="联系我们.html">联系我们</a></li><li><a href="预约沟通.html">预约沟通</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 【年份】 【公司全称】. 保留所有权利</p>
+        <div class="footer-legal"><a href="#">法律声明</a><a href="#">隐私政策</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="shared.js"></script>
+</body>
+</html>
