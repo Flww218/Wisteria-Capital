@@ -11,7 +11,6 @@
        ================================================ -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
-
   <style>
     /* ================================================
        CSS 变量（全站色彩与字体统一管理）
@@ -34,17 +33,14 @@
       --sans: 'Noto Sans SC', sans-serif;
       --transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-
     /* ================================================
        全局重置与基础样式
        ================================================ */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
     html {
       scroll-behavior: smooth;
       font-size: 16px;
     }
-
     body {
       font-family: var(--sans);
       background: var(--dark);
@@ -52,17 +48,14 @@
       overflow-x: hidden;
       cursor: default;
     }
-
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
-
     /* ================================================
        自定义滚动条样式
        ================================================ */
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--dark); }
     ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
-
     /* ================================================
        【导航栏】顶部固定导航
        包含：LOGO + 菜单项 + 移动端汉堡菜单
@@ -79,13 +72,11 @@
       background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0) 100%);
       transition: var(--transition);
     }
-
     .navbar.scrolled {
       background: rgba(10,10,10,0.97);
       border-bottom: 1px solid rgba(201,168,76,0.2);
       backdrop-filter: blur(12px);
     }
-
     /* ——— LOGO 区域 ——— */
     /* 请将此处替换为您的 LOGO 图片或文字 LOGO */
     .logo {
@@ -94,7 +85,6 @@
       gap: 12px;
       transition: var(--transition);
     }
-
     .logo-mark {
       width: 38px; height: 38px;
       border: 1.5px solid var(--gold);
@@ -104,7 +94,6 @@
       color: var(--gold);
       letter-spacing: 0.1em;
     }
-
     .logo-text {
       font-family: var(--serif);
       font-size: 1.1rem;
@@ -112,7 +101,6 @@
       letter-spacing: 0.15em;
       color: var(--white);
     }
-
     .logo-text span {
       display: block;
       font-size: 0.55rem;
@@ -122,7 +110,6 @@
       color: var(--gold);
       margin-top: 2px;
     }
-
     /* ——— 导航菜单 ——— */
     /* 菜单项请根据您的页面结构修改 */
     .nav-links {
@@ -131,7 +118,6 @@
       gap: 2.5rem;
       list-style: none;
     }
-
     .nav-links a {
       font-size: 0.75rem;
       font-weight: 500;
@@ -142,7 +128,6 @@
       position: relative;
       padding-bottom: 3px;
     }
-
     .nav-links a::after {
       content: '';
       position: absolute;
@@ -151,10 +136,8 @@
       background: var(--gold);
       transition: width 0.3s ease;
     }
-
     .nav-links a:hover { color: var(--gold); }
     .nav-links a:hover::after { width: 100%; }
-
     /* ——— 登录按钮 ——— */
     /* 此按钮链接至客户门户系统，请替换 href */
     .nav-cta {
@@ -166,12 +149,10 @@
       color: var(--gold);
       transition: var(--transition);
     }
-
     .nav-cta:hover {
       background: var(--gold);
       color: var(--dark);
     }
-
     /* ——— 移动端汉堡菜单按钮 ——— */
     .hamburger {
       display: none;
@@ -180,14 +161,12 @@
       cursor: pointer;
       padding: 4px;
     }
-
     .hamburger span {
       display: block;
       width: 24px; height: 1.5px;
       background: var(--gold);
       transition: var(--transition);
     }
-
     /* ================================================
        【移动端全屏菜单】
        当汉堡图标被点击时显示
@@ -205,21 +184,17 @@
       pointer-events: none;
       transition: var(--transition);
     }
-
     .mobile-nav.open {
       opacity: 1;
       pointer-events: all;
     }
-
     .mobile-nav ul {
       list-style: none;
       text-align: center;
     }
-
     .mobile-nav ul li {
       margin: 1.2rem 0;
     }
-
     .mobile-nav ul a {
       font-family: var(--serif);
       font-size: 2rem;
@@ -227,9 +202,7 @@
       letter-spacing: 0.05em;
       transition: var(--transition);
     }
-
     .mobile-nav ul a:hover { color: var(--gold); }
-
     /* ================================================
        【英雄区 / 首屏横幅】
        这是网站最顶部的全屏视觉区块
@@ -246,7 +219,6 @@
       justify-content: center;
       overflow: hidden;
     }
-
     /* 背景视频容器
        请将 <video> 标签的 src 替换为您的视频文件 URL
        推荐使用城市夜景、金融中心或抽象粒子等视频 */
@@ -256,7 +228,6 @@
       background: var(--dark-2);
       overflow: hidden;
     }
-
     /* 背景图片占位（若无视频可使用此背景图）
        请将 url() 中替换为您的背景图片路径 */
     .hero-bg::before {
@@ -269,7 +240,6 @@
         radial-gradient(ellipse 50% 80% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%),
         linear-gradient(135deg, #050505 0%, #0f0e0c 100%);
     }
-
     /* 装饰性网格线背景 */
     .hero-bg::after {
       content: '';
@@ -281,7 +251,6 @@
       background-size: 60px 60px;
       mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%);
     }
-
     /* 英雄区内容 */
     .hero-content {
       position: relative;
@@ -291,12 +260,10 @@
       padding: 0 2rem;
       animation: heroFadeIn 1.4s ease forwards;
     }
-
     @keyframes heroFadeIn {
       from { opacity: 0; transform: translateY(30px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
     /* 英雄区小标签 */
     .hero-eyebrow {
       font-size: 0.65rem;
@@ -306,7 +273,6 @@
       margin-bottom: 1.5rem;
       animation: fadeUp 1s 0.3s both;
     }
-
     /* 【核心口号】请替换为您公司的核心理念或口号 */
     .hero-title {
       font-family: var(--serif);
@@ -318,13 +284,11 @@
       margin-bottom: 1.5rem;
       animation: fadeUp 1s 0.5s both;
     }
-
     .hero-title em {
       font-style: italic;
       color: var(--gold-light);
       font-weight: 300;
     }
-
     /* 【副标题】公司成立年份或补充说明 */
     .hero-sub {
       font-size: 1rem;
@@ -334,7 +298,6 @@
       margin-bottom: 3rem;
       animation: fadeUp 1s 0.7s both;
     }
-
     /* 英雄区按钮组 */
     .hero-actions {
       display: flex;
@@ -343,7 +306,6 @@
       flex-wrap: wrap;
       animation: fadeUp 1s 0.9s both;
     }
-
     /* 主按钮 */
     .btn-primary {
       font-size: 0.72rem;
@@ -356,12 +318,10 @@
       transition: var(--transition);
       border: 1px solid var(--gold);
     }
-
     .btn-primary:hover {
       background: transparent;
       color: var(--gold);
     }
-
     /* 次级按钮 */
     .btn-ghost {
       font-size: 0.72rem;
@@ -373,12 +333,10 @@
       color: var(--light);
       transition: var(--transition);
     }
-
     .btn-ghost:hover {
       border-color: var(--gold);
       color: var(--gold);
     }
-
     /* 向下滚动指示箭头 */
     .scroll-hint {
       position: absolute;
@@ -393,28 +351,23 @@
       opacity: 0.5;
       animation: bounce 2s infinite;
     }
-
     .scroll-hint span {
       font-size: 0.6rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
     }
-
     .scroll-hint-line {
       width: 1px; height: 40px;
       background: linear-gradient(to bottom, var(--gold), transparent);
     }
-
     @keyframes bounce {
       0%, 100% { transform: translateX(-50%) translateY(0); }
       50%       { transform: translateX(-50%) translateY(8px); }
     }
-
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
     /* ================================================
        【数据统计区】
        展示公司核心数据：AUM、成立年份、团队人数等
@@ -426,7 +379,6 @@
       border-bottom: 1px solid rgba(201,168,76,0.15);
       padding: 3rem 4vw;
     }
-
     .stats-inner {
       max-width: 1200px;
       margin: 0 auto;
@@ -434,18 +386,14 @@
       grid-template-columns: repeat(4, 1fr);
       gap: 2rem;
     }
-
     .stat-item {
       text-align: center;
       padding: 1rem;
       border-right: 1px solid rgba(201,168,76,0.1);
       transition: var(--transition);
     }
-
     .stat-item:last-child { border-right: none; }
-
     .stat-item:hover .stat-number { color: var(--gold-light); }
-
     /* 【统计数字】请替换为真实数据 */
     .stat-number {
       font-family: var(--serif);
@@ -456,7 +404,6 @@
       margin-bottom: 0.5rem;
       transition: var(--transition);
     }
-
     /* 【统计标签】请替换为对应说明文字 */
     .stat-label {
       font-size: 0.68rem;
@@ -464,7 +411,6 @@
       text-transform: uppercase;
       color: var(--mid);
     }
-
     /* ================================================
        【关于我们区块】
        简要介绍公司背景、理念与核心优势
@@ -479,12 +425,10 @@
       gap: 6rem;
       align-items: center;
     }
-
     /* 左侧图片区域 */
     .about-visual {
       position: relative;
     }
-
     /* 【主图】请替换为公司办公室或城市建筑图片 */
     .about-img-main {
       width: 100%;
@@ -500,32 +444,27 @@
       position: relative;
       overflow: hidden;
     }
-
     .about-img-main::before {
       content: '';
       position: absolute;
       inset: 0;
       background: linear-gradient(135deg, rgba(201,168,76,0.05) 0%, transparent 100%);
     }
-
     .img-placeholder-text {
       text-align: center;
       color: rgba(201,168,76,0.4);
     }
-
     .img-placeholder-text p:first-child {
       font-size: 0.6rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       margin-bottom: 0.5rem;
     }
-
     .img-placeholder-text p:last-child {
       font-size: 0.55rem;
       letter-spacing: 0.15em;
       color: rgba(201,168,76,0.25);
     }
-
     /* 装饰角标 */
     .about-visual::after {
       content: '';
@@ -535,7 +474,6 @@
       border-right: 1.5px solid rgba(201,168,76,0.3);
       border-bottom: 1.5px solid rgba(201,168,76,0.3);
     }
-
     .about-visual::before {
       content: '';
       position: absolute;
@@ -544,7 +482,6 @@
       border-left: 1.5px solid rgba(201,168,76,0.3);
       border-top: 1.5px solid rgba(201,168,76,0.3);
     }
-
     /* 右侧文字区域 */
     .about-content {}
 
@@ -555,7 +492,6 @@
       color: var(--gold);
       margin-bottom: 1.2rem;
     }
-
     /* 【关于标题】请替换为您的公司介绍标题 */
     .section-title {
       font-family: var(--serif);
@@ -565,7 +501,6 @@
       color: var(--white);
       margin-bottom: 1.8rem;
     }
-
     .section-title em {
       font-style: italic;
       color: var(--gold-light);
