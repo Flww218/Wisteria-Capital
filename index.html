@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>【公司名称】- 卓越资本管理</title>
+  <!-- ================================================
+       字体引入：
+       - "Noto Serif SC" 用于中文衬线标题，气质古典
+       - "Noto Sans SC" 用于中文正文，清晰易读
+       ================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ================================================
+       CSS 变量（全站色彩与字体统一管理）
+       --gold：品牌金色，用于强调与点缀
+       --dark：深色背景
+       --light：浅色文字
+       --mid：中灰文字
+       请根据您的品牌色彩替换这里的颜色值
+       ================================================ */
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8C97A;
+      --dark: #0A0A0A;
+      --dark-2: #111111;
+      --dark-3: #1A1A1A;
+      --light: #F5F0E8;
+      --mid: #888880;
+      --white: #FFFFFF;
+      --serif: 'Noto Serif SC', 'Playfair Display', serif;
+      --sans: 'Noto Sans SC', sans-serif;
+      --transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* ================================================
+       全局重置与基础样式
+       ================================================ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--dark);
+      color: var(--light);
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ================================================
+       自定义滚动条样式
+       ================================================ */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+    /* ================================================
+       【导航栏】顶部固定导航
+       包含：LOGO + 菜单项 + 移动端汉堡菜单
+       ================================================ */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0 4vw;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0) 100%);
+      transition: var(--transition);
+    }
+
+    .navbar.scrolled {
+      background: rgba(10,10,10,0.97);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      backdrop-filter: blur(12px);
+    }
+
+    /* ——— LOGO 区域 ——— */
+    /* 请将此处替换为您的 LOGO 图片或文字 LOGO */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: var(--transition);
+    }
+
+    .logo-mark {
+      width: 38px; height: 38px;
+      border: 1.5px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+    }
+
+    .logo-text {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--white);
+    }
+
+    .logo-text span {
+      display: block;
+      font-size: 0.55rem;
+      font-family: var(--sans);
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      margin-top: 2px;
+    }
+
+    /* ——— 导航菜单 ——— */
+    /* 菜单项请根据您的页面结构修改 */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.75);
+      transition: var(--transition);
+      position: relative;
+      padding-bottom: 3px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ——— 登录按钮 ——— */
+    /* 此按钮链接至客户门户系统，请替换 href */
+    .nav-cta {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 8px 22px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      transition: var(--transition);
+    }
+
+    .nav-cta:hover {
+      background: var(--gold);
+      color: var(--dark);
+    }
+
+    /* ——— 移动端汉堡菜单按钮 ——— */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px; height: 1.5px;
+      background: var(--gold);
+      transition: var(--transition);
+    }
+
+    /* ================================================
+       【移动端全屏菜单】
+       当汉堡图标被点击时显示
+       ================================================ */
+    .mobile-nav {
+      position: fixed;
+      inset: 0;
+      background: var(--dark);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+    }
+
+    .mobile-nav.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .mobile-nav ul {
+      list-style: none;
+      text-align: center;
+    }
+
+    .mobile-nav ul li {
+      margin: 1.2rem 0;
+    }
+
+    .mobile-nav ul a {
+      font-family: var(--serif);
+      font-size: 2rem;
+      color: var(--light);
+      letter-spacing: 0.05em;
+      transition: var(--transition);
+    }
+
+    .mobile-nav ul a:hover { color: var(--gold); }
+
+    /* ================================================
+       【英雄区 / 首屏横幅】
+       这是网站最顶部的全屏视觉区块
+       - 背景：请替换为您的背景视频或图片
+       - 标题：公司核心理念或口号
+       - 副标题：成立年份或补充说明
+       ================================================ */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* 背景视频容器
+       请将 <video> 标签的 src 替换为您的视频文件 URL
+       推荐使用城市夜景、金融中心或抽象粒子等视频 */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: var(--dark-2);
+      overflow: hidden;
+    }
+
+    /* 背景图片占位（若无视频可使用此背景图）
+       请将 url() 中替换为您的背景图片路径 */
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      /* 替换为您的背景图：background-image: url('您的图片路径'); */
+      background: 
+        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(201,168,76,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 80% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%),
+        linear-gradient(135deg, #050505 0%, #0f0e0c 100%);
+    }
+
+    /* 装饰性网格线背景 */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%);
+    }
+
+    /* 英雄区内容 */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 900px;
+      padding: 0 2rem;
+      animation: heroFadeIn 1.4s ease forwards;
+    }
+
+    @keyframes heroFadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 英雄区小标签 */
+    .hero-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 1s 0.3s both;
+    }
+
+    /* 【核心口号】请替换为您公司的核心理念或口号 */
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 5vw, 4.5rem);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 1s 0.5s both;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-light);
+      font-weight: 300;
+    }
+
+    /* 【副标题】公司成立年份或补充说明 */
+    .hero-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: rgba(245,240,232,0.55);
+      margin-bottom: 3rem;
+      animation: fadeUp 1s 0.7s both;
+    }
+
+    /* 英雄区按钮组 */
+    .hero-actions {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 1s 0.9s both;
+    }
+
+    /* 主按钮 */
+    .btn-primary {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 14px 36px;
+      background: var(--gold);
+      color: var(--dark);
+      transition: var(--transition);
+      border: 1px solid var(--gold);
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--gold);
+    }
+
+    /* 次级按钮 */
+    .btn-ghost {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 14px 36px;
+      border: 1px solid rgba(245,240,232,0.25);
+      color: var(--light);
+      transition: var(--transition);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* 向下滚动指示箭头 */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.5;
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-hint span {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+    }
+
+    .scroll-hint-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ================================================
+       【数据统计区】
+       展示公司核心数据：AUM、成立年份、团队人数等
+       请将数字和标签替换为您公司的真实数据
+       ================================================ */
+    .stats-bar {
+      background: var(--dark-3);
+      border-top: 1px solid rgba(201,168,76,0.15);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      padding: 3rem 4vw;
+    }
+
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 1rem;
+      border-right: 1px solid rgba(201,168,76,0.1);
+      transition: var(--transition);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-item:hover .stat-number { color: var(--gold-light); }
+
+    /* 【统计数字】请替换为真实数据 */
+    .stat-number {
+      font-family: var(--serif);
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      transition: var(--transition);
+    }
+
+    /* 【统计标签】请替换为对应说明文字 */
+    .stat-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    /* ================================================
+       【关于我们区块】
+       简要介绍公司背景、理念与核心优势
+       请替换文字内容，图片路径留空供您填入
+       ================================================ */
+    .about {
+      padding: 8rem 4vw;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    /* 左侧图片区域 */
+    .about-visual {
+      position: relative;
+    }
+
+    /* 【主图】请替换为公司办公室或城市建筑图片 */
+    .about-img-main {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: var(--dark-3);
+      border: 1px solid rgba(201,168,76,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--mid);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-img-main::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,168,76,0.05) 0%, transparent 100%);
+    }
+
+    .img-placeholder-text {
+      text-align: center;
+      color: rgba(201,168,76,0.4);
+    }
+
+    .img-placeholder-text p:first-child {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .img-placeholder-text p:last-child {
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      color: rgba(201,168,76,0.25);
+    }
+
+    /* 装饰角标 */
+    .about-visual::after {
+      content: '';
+      position: absolute;
+      bottom: -20px; right: -20px;
+      width: 120px; height: 120px;
+      border-right: 1.5px solid rgba(201,168,76,0.3);
+      border-bottom: 1.5px solid rgba(201,168,76,0.3);
+    }
+
+    .about-visual::before {
+      content: '';
+      position: absolute;
+      top: -20px; left: -20px;
+      width: 80px; height: 80px;
+      border-left: 1.5px solid rgba(201,168,76,0.3);
+      border-top: 1.5px solid rgba(201,168,76,0.3);
+    }
+
+    /* 右侧文字区域 */
+    .about-content {}
+
+    .section-eyebrow {
+      font-size: 0.62rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    /* 【关于标题】请替换为您的公司介绍标题 */
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 600;
+      line-height: 1.25;
+      color: var(--white);
+      margin-bottom: 1.8rem;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--gold-light);
+      font-weight: 300;
+    }
+
+    /* 【关于正文】请替换为公司简介、历史背景等文字 */
+    .section-body {
+      font-size: 0.95rem;
+      line-height: 1.9;
+      color: rgba(245,240,232,0.65);
+      margin-bottom: 1.2rem;
+    }
+
+    .about-features {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* 【特色优势列表】请替换为您公司的核心竞争力 */
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(201,168,76,0.08);
+    }
+
+    .feature-num {
+      font-family: var(--serif);
+      font-size: 0.8rem;
+      color: var(--gold);
+      min-width: 24px;
+      padding-top: 2px;
+    }
+
+    .feature-text strong {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.05em;
+    }
+
+    .feature-text p {
+      font-size: 0.8rem;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    /* ================================================
+       【投资策略区块】
+       展示公司的各类投资策略或产品线
+       请根据实际策略数量增减卡片数量
+       ================================================ */
+    .strategies {
+      padding: 8rem 4vw;
+      background: var(--dark-2);
+    }
+
+    .strategies-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+    }
+
+    .section-header-left {}
+
+    .view-all {
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px;
+      transition: var(--transition);
+    }
+
+    .view-all:hover { opacity: 0.7; }
+
+    /* 策略卡片网格 */
+    .strategies-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+    }
+
+    /* 策略卡片 */
+    .strategy-card {
+      background: var(--dark-3);
+      padding: 3rem 2.5rem;
+      border: 1px solid rgba(201,168,76,0.08);
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .strategy-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .strategy-card:hover {
+      background: rgba(201,168,76,0.04);
+      border-color: rgba(201,168,76,0.2);
+    }
+
+    .strategy-card:hover::before { transform: scaleX(1); }
+
+    /* 策略图标区域（可替换为 SVG 或 icon font） */
+    .strategy-icon {
+      width: 44px; height: 44px;
+      border: 1px solid rgba(201,168,76,0.3);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.8rem;
+      color: var(--gold);
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .strategy-card:hover .strategy-icon {
+      background: rgba(201,168,76,0.1);
+    }
+
+    /* 【策略名称】请替换为您的投资策略名称 */
+    .strategy-name {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    /* 【策略描述】请替换为该策略的简要说明 */
+    .strategy-desc {
+      font-size: 0.82rem;
+      line-height: 1.8;
+      color: rgba(245,240,232,0.5);
+      margin-bottom: 1.5rem;
+    }
+
+    .strategy-link {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .strategy-link::after {
+      content: '→';
+      transition: transform 0.3s ease;
+    }
+
+    .strategy-card:hover .strategy-link::after {
+      transform: translateX(6px);
+    }
+
+    /* ================================================
+       【理念引语区块】
+       展示公司核心投资哲学或创始人名言
+       请替换引号内的文字为您的核心理念
+       ================================================ */
+    .philosophy {
+      padding: 10rem 4vw;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .philosophy::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%);
+    }
+
+    .philosophy-inner {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .philosophy-mark {
+      font-family: var(--serif);
+      font-size: 8rem;
+      color: rgba(201,168,76,0.12);
+      line-height: 0.5;
+      margin-bottom: 1rem;
+    }
+
+    /* 【核心理念引语】请替换为您的投资哲学 */
+    .philosophy-quote {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.55;
+      color: var(--light);
+      margin-bottom: 2.5rem;
+    }
+
+    /* 【引语来源】请替换为创始人姓名或职位 */
+    .philosophy-author {
+      font-size: 0.68rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .philosophy-author span {
+      display: block;
+      font-size: 0.6rem;
+      color: var(--mid);
+      letter-spacing: 0.2em;
+      margin-top: 0.4rem;
+    }
+
+    /* ================================================
+       【团队介绍区块】
+       展示核心管理团队成员
+       请替换姓名、职位、简介，并添加头像图片
+       ================================================ */
+    .team {
+      padding: 8rem 4vw;
+      background: var(--dark-3);
+    }
+
+    .team-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .team-card {
+      cursor: pointer;
+    }
+
+    /* 【头像】请替换为团队成员照片 */
+    .team-avatar {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--dark-2);
+      border: 1px solid rgba(201,168,76,0.1);
+      margin-bottom: 1.2rem;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .team-avatar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.6) 0%, transparent 50%);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .team-card:hover .team-avatar::after { opacity: 1; }
+
+    .avatar-placeholder {
+      font-family: var(--serif);
+      font-size: 2rem;
+      color: rgba(201,168,76,0.2);
+      font-weight: 300;
+    }
+
+    /* 【成员姓名】请替换为实际姓名 */
+    .team-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+
+    /* 【职位】请替换为实际职位 */
+    .team-title {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ================================================
+       【联系我们区块】
+       包含地址、电话、邮箱等联系信息
+       请替换所有联系方式为真实信息
+       ================================================ */
+    .contact {
+      padding: 8rem 4vw;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+    }
+
+    .contact-info {}
+
+    .contact-detail {
+      margin-top: 2.5rem;
+    }
+
+    .contact-item {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+
+    .contact-item-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    /* 【联系信息】请替换为真实地址、电话等 */
+    .contact-item-value {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--light);
+    }
+
+    /* 联系表单区域 */
+    .contact-form {}
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 0.6rem;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      background: var(--dark-3);
+      border: 1px solid rgba(201,168,76,0.15);
+      color: var(--light);
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      padding: 12px 16px;
+      outline: none;
+      transition: var(--transition);
+      appearance: none;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: rgba(201,168,76,0.4);
+    }
+
+    .form-textarea { height: 120px; resize: none; }
+
+    .form-submit {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 14px 36px;
+      background: var(--gold);
+      color: var(--dark);
+      border: none;
+      cursor: pointer;
+      font-family: var(--sans);
+      font-weight: 600;
+      transition: var(--transition);
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    .form-submit:hover { background: var(--gold-light); }
+
+    /* ================================================
+       【页脚】
+       包含：LOGO、菜单、版权信息、社交链接
+       请替换公司名称、年份、社交媒体链接
+       ================================================ */
+    .footer {
+      background: #050505;
+      border-top: 1px solid rgba(201,168,76,0.15);
+      padding: 4rem 4vw 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(201,168,76,0.08);
+    }
+
+    .footer-brand {}
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* 页脚版本 LOGO */
+    .footer-logo-mark {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(201,168,76,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif);
+      font-size: 0.8rem;
+      color: var(--gold);
+    }
+
+    .footer-logo-text {
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      color: rgba(245,240,232,0.7);
+      letter-spacing: 0.1em;
+    }
+
+    /* 【公司简介（页脚版）】请替换为一句话公司描述 */
+    .footer-desc {
+      font-size: 0.8rem;
+      line-height: 1.8;
+      color: rgba(245,240,232,0.35);
+      margin-bottom: 1.5rem;
+    }
+
+    /* 社交媒体图标区域 */
+    /* 请替换 href 为您的社交媒体主页链接 */
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-icon {
+      width: 34px; height: 34px;
+      border: 1px solid rgba(201,168,76,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      color: var(--mid);
+      transition: var(--transition);
+    }
+
+    .social-icon:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* 页脚菜单列 */
+    /* 请根据实际页面结构调整菜单项 */
+    .footer-col-title {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      color: rgba(245,240,232,0.45);
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    /* 页脚底部版权区域 */
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* 【版权文字】请替换公司名称和年份 */
+    .footer-copy {
+      font-size: 0.68rem;
+      color: rgba(245,240,232,0.25);
+      letter-spacing: 0.1em;
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-legal a {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: rgba(245,240,232,0.25);
+      transition: var(--transition);
+    }
+
+    .footer-legal a:hover { color: var(--gold); }
+
+    /* ================================================
+       响应式适配
+       ================================================ */
+    @media (max-width: 1024px) {
+      .strategies-grid { grid-template-columns: repeat(2, 1fr); }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      .about { grid-template-columns: 1fr; gap: 3rem; }
+      .about-visual { order: -1; }
+
+      .strategies-grid { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(201,168,76,0.1); }
+      .stat-item:nth-child(even) { border-right: none; }
+
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-top { grid-template-columns: 1fr; }
+
+      .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    }
+
+    /* ================================================
+       滚动入场动画（Intersection Observer 驱动）
+       ================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+  </style>
+</head>
+<body>
+
+  <!-- ================================================
+       【移动端全屏菜单】
+       在小屏幕点击汉堡按钮后展开
+       请根据实际页面结构调整菜单项文字和链接
+       ================================================ -->
+  <nav class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="#" onclick="toggleMenu()">首 页</a></li>
+      <!-- 请替换下列菜单项为您的实际页面 -->
+      <li><a href="#strategies" onclick="toggleMenu()">投资策略</a></li>
+      <li><a href="#about" onclick="toggleMenu()">关于我们</a></li>
+      <li><a href="#team" onclick="toggleMenu()">团队介绍</a></li>
+      <li><a href="#contact" onclick="toggleMenu()">联系我们</a></li>
+    </ul>
+  </nav>
+
+  <!-- ================================================
+       【顶部导航栏】
+       固定在页面顶部，滚动后背景加深
+       ================================================ -->
+  <header class="navbar" id="navbar">
+    <!-- LOGO 区域：请替换"汉"为公司名称首字，"【公司名称】"为全称 -->
+    <a href="#" class="logo">
+      <div class="logo-mark">汉</div>
+      <div class="logo-text">
+        【公司名称】
+        <span>CAPITAL MANAGEMENT</span>
+      </div>
+    </a>
+
+    <!-- 导航菜单：请替换文字和 href 为实际页面 -->
+    <ul class="nav-links">
+      <li><a href="#strategies">投资策略</a></li>
+      <li><a href="#about">关于我们</a></li>
+      <li><a href="#team">核心团队</a></li>
+      <li><a href="#contact">联系我们</a></li>
+    </ul>
+
+    <div style="display:flex; gap:1rem; align-items:center;">
+      <!-- 客户登录按钮：请替换 href 为您的客户门户地址 -->
+      <a href="#" class="nav-cta">客户登录</a>
+      <!-- 移动端汉堡菜单按钮 -->
+      <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================================================
+       【英雄区 / 首屏视觉区】
+       网站首屏全幅展示区，视觉冲击力最强的部分
+       ================================================ -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <!-- 
+        【背景视频】
+        请取消注释并替换 src 为您的视频文件地址
+        推荐：城市金融区延时视频、抽象数据流、建筑航拍等
+        
+        <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.3;">
+          <source src="您的视频文件路径.mp4" type="video/mp4" />
+        </video>
+      -->
+    </div>
+
+    <div class="hero-content">
+      <!-- 【页面上方小标签】请替换为公司所在地或类型 -->
+      <p class="hero-eyebrow">全球另类投资管理</p>
+
+      <!-- 【核心口号】请替换为您公司的核心理念
+           建议：8-20个字，简洁有力，体现投资哲学 -->
+      <h1 class="hero-title">
+        穿越周期<br/>
+        <em>创造长期价值</em>
+      </h1>
+
+      <!-- 【副标题】请替换为成立年份或补充说明 -->
+      <p class="hero-sub">专注价值发现，深耕另类资产领域，自 【成立年份】 年深耕至今</p>
+
+      <!-- 行动按钮组 -->
+      <div class="hero-actions">
+        <!-- 主按钮：引导用户了解策略 -->
+        <a href="#strategies" class="btn-primary">了解投资策略</a>
+        <!-- 次级按钮：引导联系 -->
+        <a href="#contact" class="btn-ghost">预约沟通</a>
+      </div>
+    </div>
+
+    <!-- 向下滚动提示 -->
+    <div class="scroll-hint">
+      <span>向下滚动</span>
+      <div class="scroll-hint-line"></div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       【数据统计区】
+       用简洁数字展示公司规模与实力
+       请将所有数字和标签替换为真实数据
+       ================================================ -->
+  <section class="stats-bar">
+    <div class="stats-inner">
+      <!-- 【统计项1】管理资产规模（AUM），格式如：500亿+ -->
+      <div class="stat-item reveal">
+        <div class="stat-number">【金额】</div>
+        <div class="stat-label">管理资产规模（人民币）</div>
+      </div>
+
+      <!-- 【统计项2】成立年限 -->
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-number">【年数】+</div>
+        <div class="stat-label">专注另类投资年限</div>
+      </div>
+
+      <!-- 【统计项3】投资策略数量或客户数量 -->
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-number">【数量】</div>
+        <div class="stat-label">核心投资策略</div>
+      </div>
+
+      <!-- 【统计项4】团队人数或覆盖市场数 -->
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-number">【人数】</div>
+        <div class="stat-label">专业投资团队成员</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       【关于我们区块】
+       介绍公司背景、投资理念和核心优势
+       ================================================ -->
+  <section class="about" id="about">
+    <!-- 左侧图片 -->
+    <div class="about-visual reveal">
+      <!-- 
+        【主图片】请替换为您的公司图片
+        建议：办公室内景、城市地标建筑、团队合影等
+        实际使用时将下方 div 替换为：
+        <img src="您的图片路径" alt="图片描述" style="width:100%;aspect-ratio:4/5;object-fit:cover;" />
+      -->
+      <div class="about-img-main">
+        <div class="img-placeholder-text">
+          <p>【 图 片 区 域 】</p>
+          <p>请放置公司图片或办公室照片</p>
+          <p>建议尺寸：800×1000 像素</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右侧文字 -->
+    <div class="about-content">
+      <p class="section-eyebrow reveal">关于我们</p>
+
+      <!-- 【关于标题】请替换为您的介绍标题 -->
+      <h2 class="section-title reveal">
+        深耕另类资产<br/>
+        <em>探寻价值洼地</em>
+      </h2>
+
+      <!-- 【公司简介第一段】请替换为真实公司介绍 -->
+      <p class="section-body reveal">
+        【公司全称】是一家专注于另类资产投资管理的机构，
+        自 【成立年份】 年创立以来，始终坚持独立研究、价值驱动的投资理念，
+        致力于为机构投资者和高净值客户提供差异化的超额收益。
+      </p>
+
+      <!-- 【公司简介第二段】请替换为投资理念或优势说明 -->
+      <p class="section-body reveal">
+        我们相信，市场的复杂性孕育着真正的机遇。
+        通过对宏观趋势的深刻洞察与对微观基本面的精细研究，
+        我们在传统与另类资产类别中寻找被市场忽视的定价错误。
+      </p>
+
+      <!-- 核心优势列表 -->
+      <div class="about-features">
+        <!-- 【优势一】请替换为您的第一项核心竞争力 -->
+        <div class="feature-item reveal">
+          <div class="feature-num">01</div>
+          <div class="feature-text">
+            <strong>独立研究驱动</strong>
+            <p>【请填写：简要说明您独立研究能力的特点与优势，约30-50字】</p>
+          </div>
+        </div>
+
+        <!-- 【优势二】请替换为您的第二项核心竞争力 -->
+        <div class="feature-item reveal reveal-delay-1">
+          <div class="feature-num">02</div>
+          <div class="feature-text">
+            <strong>多元资产配置</strong>
+            <p>【请填写：简要说明您的资产配置方法与覆盖范围，约30-50字】</p>
+          </div>
+        </div>
+
+        <!-- 【优势三】请替换为您的第三项核心竞争力 -->
+        <div class="feature-item reveal reveal-delay-2">
+          <div class="feature-num">03</div>
+          <div class="feature-text">
+            <strong>严格风险管理</strong>
+            <p>【请填写：简要说明您的风控体系与下行保护机制，约30-50字】</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       【投资策略区块】
+       展示公司主要投资策略/产品线
+       请根据实际策略数量增减卡片
+       ================================================ -->
+  <section class="strategies" id="strategies">
+    <div class="strategies-inner">
+      <div class="section-header">
+        <div class="section-header-left">
+          <p class="section-eyebrow reveal">我们的策略</p>
+          <!-- 【策略区块标题】请替换 -->
+          <h2 class="section-title reveal">核心投资策略</h2>
+        </div>
+        <a href="#" class="view-all reveal">查看全部策略</a>
+      </div>
+
+      <div class="strategies-grid">
+
+        <!-- ——— 策略卡片 1 ——— -->
+        <!-- 【策略一】请替换图标、名称、描述为实际策略 -->
+        <div class="strategy-card reveal">
+          <!-- 图标：可替换为 SVG 图标或表情符号 -->
+          <div class="strategy-icon">◈</div>
+          <h3 class="strategy-name">私募股权</h3>
+          <p class="strategy-desc">
+            【请填写：该策略的投资聚焦方向、主要资产类别、
+            目标回报区间及典型投资期限，约60-80字。
+            例如：聚焦大消费、医疗健康及先进制造领域……】
+          </p>
+          <a href="#" class="strategy-link">深入了解</a>
+        </div>
+
+        <!-- ——— 策略卡片 2 ——— -->
+        <!-- 【策略二】请替换为您的第二类投资策略 -->
+        <div class="strategy-card reveal reveal-delay-1">
+          <div class="strategy-icon">◇</div>
+          <h3 class="strategy-name">对冲基金</h3>
+          <p class="strategy-desc">
+            【请填写：该策略的运作方式、对冲机制与
+            风险收益特征，约60-80字。
+            例如：采用多空股票策略，结合事件驱动……】
+          </p>
+          <a href="#" class="strategy-link">深入了解</a>
+        </div>
+
+        <!-- ——— 策略卡片 3 ——— -->
+        <!-- 【策略三】请替换为您的第三类投资策略 -->
+        <div class="strategy-card reveal reveal-delay-2">
+          <div class="strategy-icon">◉</div>
+          <h3 class="strategy-name">不动产投资</h3>
+          <p class="strategy-desc">
+            【请填写：该策略的地理覆盖范围、资产类型
+            及增值逻辑，约60-80字。
+            例如：专注核心商业地产及物流地产……】
+          </p>
+          <a href="#" class="strategy-link">深入了解</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       【核心理念引语区块】
+       以大篇幅引语形式展示公司投资哲学
+       视觉效果突出，适合展示创始人核心观点
+       ================================================ -->
+  <section class="philosophy">
+    <div class="philosophy-inner">
+      <div class="philosophy-mark reveal">"</div>
+
+      <!-- 【核心理念引语】请替换为您的投资哲学金句，建议30-60字 -->
+      <blockquote class="philosophy-quote reveal">
+        我们相信，真正的投资价值并不存在于喧嚣的共识之中，
+        而是隐藏于市场的复杂性与定价偏差之内。
+        洞察力与耐心，是穿越周期的核心资产。
+      </blockquote>
+
+      <!-- 【引语作者】请替换为创始人/首席投资官姓名及职位 -->
+      <div class="philosophy-author reveal">
+        【创始人姓名】
+        <span>【职位，例如：创始合伙人 & 首席投资官】</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       【核心团队区块】
+       展示主要管理层成员
+       请为每位成员提供照片、姓名、职位
+       ================================================ -->
+  <section class="team" id="team">
+    <div class="team-inner">
+      <p class="section-eyebrow reveal">核心团队</p>
+      <div class="section-header" style="margin-top:0.5rem;">
+        <div>
+          <!-- 【团队标题】请替换 -->
+          <h2 class="section-title reveal">经验深厚的<em>管理团队</em></h2>
+        </div>
+        <!-- 查看完整团队链接 -->
+        <a href="#" class="view-all reveal">查看完整团队</a>
+      </div>
+
+      <div class="team-grid">
+
+        <!-- ——— 团队成员 1 ——— -->
+        <!-- 【成员一】请替换姓名、职位、头像 -->
+        <div class="team-card reveal">
+          <div class="team-avatar">
+            <!-- 
+              请将下方注释替换为实际头像图片：
+              <img src="头像图片路径" alt="姓名" style="width:100%;height:100%;object-fit:cover;" />
+            -->
+            <div class="avatar-placeholder">姓</div>
+          </div>
+          <div class="team-name">【姓名一】</div>
+          <div class="team-title">创始合伙人 & 首席执行官</div>
+        </div>
+
+        <!-- ——— 团队成员 2 ——— -->
+        <!-- 【成员二】请替换姓名、职位 -->
+        <div class="team-card reveal reveal-delay-1">
+          <div class="team-avatar">
+            <div class="avatar-placeholder">姓</div>
+          </div>
+          <div class="team-name">【姓名二】</div>
+          <div class="team-title">首席投资官</div>
+        </div>
+
+        <!-- ——— 团队成员 3 ——— -->
+        <!-- 【成员三】请替换姓名、职位 -->
+        <div class="team-card reveal reveal-delay-2">
+          <div class="team-avatar">
+            <div class="avatar-placeholder">姓</div>
+          </div>
+          <div class="team-name">【姓名三】</div>
+          <div class="team-title">合伙人 & 私募股权主管</div>
+        </div>
+
+        <!-- ——— 团队成员 4 ——— -->
+        <!-- 【成员四】请替换姓名、职位 -->
+        <div class="team-card reveal reveal-delay-3">
+          <div class="team-avatar">
+            <div class="avatar-placeholder">姓</div>
+          </div>
+          <div class="team-name">【姓名四】</div>
+          <div class="team-title">首席风险官</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       【联系我们区块】
+       包含公司联系信息 + 在线咨询表单
+       请替换所有联系信息为真实数据
+       ================================================ -->
+  <section class="contact" id="contact">
+    <!-- 左侧：联系信息 -->
+    <div class="contact-info">
+      <p class="section-eyebrow reveal">联系我们</p>
+      <!-- 【联系区标题】请替换 -->
+      <h2 class="section-title reveal">开启<em>对话</em></h2>
+
+      <div class="contact-detail">
+
+        <!-- 【办公地址】请替换为真实地址 -->
+        <div class="contact-item reveal">
+          <div class="contact-item-label">办公地址</div>
+          <div class="contact-item-value">
+            【省市区】【街道】【楼宇名称】<br/>
+            【楼层与具体房号】邮编：【000000】
+          </div>
+        </div>
+
+        <!-- 【联系电话】请替换为真实电话 -->
+        <div class="contact-item reveal reveal-delay-1">
+          <div class="contact-item-label">联系电话</div>
+          <div class="contact-item-value">+86 【区号】 【电话号码】</div>
+        </div>
+
+        <!-- 【电子邮箱】请替换为真实邮箱 -->
+        <div class="contact-item reveal reveal-delay-2">
+          <div class="contact-item-label">电子邮箱</div>
+          <div class="contact-item-value">【邮箱地址@domain.com】</div>
+        </div>
+
+        <!-- 【工作时间】请替换为实际工作时间 -->
+        <div class="contact-item reveal reveal-delay-3">
+          <div class="contact-item-label">工作时间</div>
+          <div class="contact-item-value">周一至周五  09:00 – 18:00（北京时间）</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 右侧：在线咨询表单 -->
+    <!-- 注意：此表单需要后端接口或第三方服务（如 FormSubmit、Formspree）才能实际发送 -->
+    <div class="contact-form reveal">
+      <p class="section-eyebrow" style="margin-bottom:1.5rem;">发送咨询</p>
+
+      <!-- 【表单字段】可根据需要增减字段 -->
+      <div class="form-group">
+        <label class="form-label">您的姓名 *</label>
+        <input type="text" class="form-input" placeholder="请输入姓名" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">公司名称</label>
+        <input type="text" class="form-input" placeholder="请输入公司名称（可选）" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">联系邮箱 *</label>
+        <input type="email" class="form-input" placeholder="请输入电子邮箱" />
+      </div>
+
+      <!-- 投资者类型下拉框，请根据需要调整选项 -->
+      <div class="form-group">
+        <label class="form-label">投资者类型</label>
+        <select class="form-select" style="color:rgba(245,240,232,0.5);">
+          <option value="">请选择...</option>
+          <option>机构投资者</option>
+          <option>高净值个人</option>
+          <option>家族办公室</option>
+          <option>其他</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">咨询内容</label>
+        <textarea class="form-textarea" placeholder="请简要描述您的需求或问题…"></textarea>
+      </div>
+
+      <!-- 提交按钮：接入后端后可替换为实际 form action -->
+      <button class="form-submit">提 交 咨 询</button>
+    </div>
+  </section>
+
+  <!-- ================================================
+       【页脚】
+       包含 LOGO、导航链接、社交媒体、版权信息
+       请替换所有【】内容为真实信息
+       ================================================ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+
+        <!-- 品牌信息列 -->
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-mark">汉</div>
+            <div class="footer-logo-text">【公司名称】</div>
+          </div>
+
+          <!-- 【页脚公司简介】请替换为一句话描述 -->
+          <p class="footer-desc">
+            【公司名称】专注于另类投资管理，
+            以独立研究和价值驱动为核心，
+            为全球机构投资者和高净值客户创造稳健的长期回报。
+          </p>
+
+          <!-- 社交媒体图标：请替换 href 为实际链接 -->
+          <div class="footer-social">
+            <!-- 微信公众号（可替换为二维码弹窗） -->
+            <a href="#" class="social-icon" title="微信公众号">微</a>
+            <!-- 领英 -->
+            <a href="#" class="social-icon" title="LinkedIn" target="_blank">in</a>
+            <!-- 微博 -->
+            <a href="#" class="social-icon" title="微博">博</a>
+          </div>
+        </div>
+
+        <!-- 导航列一：公司 -->
+        <!-- 请根据实际页面调整链接 -->
+        <div>
+          <h4 class="footer-col-title">公 司</h4>
+          <ul class="footer-links">
+            <li><a href="#about">关于我们</a></li>
+            <li><a href="#team">核心团队</a></li>
+            <li><a href="#">公司动态</a></li>
+            <li><a href="#">职业发展</a></li>
+          </ul>
+        </div>
+
+        <!-- 导航列二：投资 -->
+        <div>
+          <h4 class="footer-col-title">投 资</h4>
+          <ul class="footer-links">
+            <li><a href="#strategies">投资策略</a></li>
+            <li><a href="#">在管项目</a></li>
+            <li><a href="#">研究洞察</a></li>
+            <li><a href="#">客户登录</a></li>
+          </ul>
+        </div>
+
+        <!-- 导航列三：法律 -->
+        <div>
+          <h4 class="footer-col-title">法 律</h4>
+          <ul class="footer-links">
+            <li><a href="#">法律声明</a></li>
+            <li><a href="#">隐私政策</a></li>
+            <li><a href="#">信息披露</a></li>
+            <li><a href="#">监管合规</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- 底部版权行 -->
+      <div class="footer-bottom">
+        <!-- 【版权文字】请替换公司名称和年份 -->
+        <p class="footer-copy">
+          © 【年份】 【公司全称】. 保留所有权利 | 已在中国证监会/中国基金业协会登记备案
+        </p>
+        <div class="footer-legal">
+          <a href="#">法律声明</a>
+          <a href="#">隐私政策</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================================================
+       JavaScript 脚本区
+       ================================================ -->
+  <script>
+    /* ——— 导航栏：滚动时背景加深 ——— */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    /* ——— 移动端菜单开关 ——— */
+    function toggleMenu() {
+      const nav = document.getElementById('mobileNav');
+      const ham = document.getElementById('hamburger');
+      nav.classList.toggle('open');
+      ham.style.opacity = nav.classList.contains('open') ? '0.4' : '1';
+    }
+
+    /* ——— 滚动入场动画（Intersection Observer）———
+       监测带有 .reveal 类的元素，进入视口后添加 .visible 类触发动画 */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); /* 只触发一次 */
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    /* ——— 平滑滚动（增强版，兼容旧浏览器）——— */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
