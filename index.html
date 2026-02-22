@@ -90,28 +90,12 @@
 
     /* ——— 移动端响应 ——— */
     @media (max-width: 768px) {
-      .intro-band { grid-template-columns: 1fr; gap: 3rem; }
-      .intro-img { order: -1; }
-      .stats-inner { grid-template-columns: repeat(2, 1fr); }
-      .stat-item { border-right: none; border-bottom: 1px solid rgba(201,168,76,0.1); }
-      .preview-grid { grid-template-columns: 1fr; }
-      .preview-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-    }
+       display:none; }
   </style>
 </head>
 <body>
 
   <!-- 移动端全屏菜单 -->
-  <nav class="mobile-nav" id="mobileNav">
-    <ul>
-      <li><a href="index.html" onclick="toggleMenu()">首　页</a></li>
-      <li><a href="投资策略.html" onclick="toggleMenu()">投资策略</a></li>
-      <li><a href="关于我们.html" onclick="toggleMenu()">关于我们</a></li>
-      <li><a href="核心团队.html" onclick="toggleMenu()">核心团队</a></li>
-      <li><a href="联系我们.html" onclick="toggleMenu()">联系我们</a></li>
-      <li><a href="预约沟通.html" onclick="toggleMenu()">预约沟通</a></li>
-    </ul>
-  </nav>
 
   <!-- 顶部导航 -->
   <header class="navbar" id="navbar">
