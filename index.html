@@ -20,11 +20,11 @@
       background-position: center;
     } /* 背景图片 */
     .hero-bg::before {
-      content: ''; position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(201,168,76,0.08) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 80% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%),
-        linear-gradient(135deg, #050505 0%, #0f0e0c 100%);
+    content: ''; position: absolute; inset: 0;
+    background:
+    radial-gradient(ellipse 80% 60% at 60% 40%, rgba(201,168,76,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 80% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%),
+    linear-gradient(135deg, rgba(5,5,5,0.55) 0%, rgba(15,14,12,0.55) 100%); /* 改这里 */
     } /* 渐变光影效果 */
     .hero-bg::after {
       content: ''; position: absolute; inset: 0;
