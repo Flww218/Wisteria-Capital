@@ -20,9 +20,8 @@
       position: relative; height: 100vh; min-height: 600px;
       display: flex; align-items: center; justify-content: center; overflow: hidden;
     }
-    .hero-bg {
-  background: rgba(15,14,12,0.65); 
-  }
+    .hero-bg { background: rgba(15,14,12,0.65);  }
+
     .hero-bg::before {
     content: ''; position: absolute; inset: 0;
     background:
@@ -30,12 +29,14 @@
     radial-gradient(ellipse 50% 80% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%),
     linear-gradient(135deg, rgba(5,5,5,0.65) 0%, rgba(15,14,12,0.65) 100%);
     } /* 渐变光影效果 */
+
     .hero-bg::after {
       content: ''; position: absolute; inset: 0;
       background-image: linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
       background-size: 60px 60px;
       mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%);
     } /* 网格纹理层 */
+
     .hero-content {
       position: relative; z-index: 2; text-align: center;
       max-width: 900px; padding: 0 2rem;
@@ -55,18 +56,18 @@
     /* ——— 统计数字条 ——— */
     .stats-bar { background: rgba(15, 14, 12, 0.65); border-top: 1px solid rgba(201,168,76,0.15); border-bottom: 1px solid rgba(201,168,76,0.15); padding: 3rem 4vw; }
     .stats-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
-    .stat-item { text-align: center; padding: 1rem; border-right: 1px solid rgba(201,168,76,0.1); }
+    .stat-item { text-align: center; padding: 2rem; border-right: 1px solid rgba(201,168,76,0.3); }
     .stat-item:last-child { border-right: none; }
     .stat-number { font-family: var(--serif); font-size: 2.8rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
     .stat-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); }
     /* ——— 关于我们的横幅 ——— */
-    .intro-band { padding: 7rem 4vw; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
-    .intro-img { aspect-ratio: 4/5; position: relative; }
+   .intro-band { padding: 14rem 8vw; background: rgba(15, 14, 12, 0.65);max-width: 1800px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .intro-img { aspect-ratio: 5/5; position: relative; }
     .intro-img .img-block { width: 100%; height: 100%; }
-    .intro-img::after { content: ''; position: absolute; bottom: -20px; right: -20px; width: 100px; height: 100px; border-right: 1.5px solid rgba(201,168,76,0.75); border-bottom: 1.5px solid rgba(201,168,76,0.75); }
-    .intro-img::before { content: ''; position: absolute; top: -20px; left: -20px; width: 70px; height: 70px; border-left: 1.5px solid rgba(201,168,76,0.75); border-top: 1.5px solid rgba(201,168,76,0.75); }
+    .intro-img::after { content: ''; position: absolute; bottom: -20px; right: -20px; width: 100px; height: 100px; border-right: 1.5px solid rgba(201,168,76,0.8); border-bottom: 1.5px solid rgba(201,168,76,0.8); }
+    .intro-img::before { content: ''; position: absolute; top: -20px; left: -20px; width: 70px; height: 70px; border-left: 1.5px solid rgba(201,168,76,0.8); border-top: 1.5px solid rgba(201,168,76,0.8); }
     /* ——— 策略预览 ——— */
-    .strategies-preview { padding: 7rem 4vw; background: rgba(10, 10, 10, 0.65); }
+    .strategies-preview { padding: 7rem 4vw; background: rgba(15, 14, 12, 0.65); }
     .strategies-preview .inner { max-width: 1200px; margin: 0 auto; }
     .preview-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
     .view-all { font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); border-bottom: 1px solid var(--gold); padding-bottom: 2px; transition: var(--transition); }
@@ -83,16 +84,15 @@
     .preview-card:hover .preview-link::after { content: '→'; transform: translateX(6px); }
     .preview-link::after { content: '→'; transition: transform 0.3s ease; }
     /* ——— 理念引语 ——— */
-    .philosophy { padding: 10rem 4vw; position: relative; overflow: hidden; text-align: center; }
-    .philosophy::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(201,168,76,0.75) 0%, transparent 70%); }
+    .philosophy { padding: 10rem 4vw; background: rgba(15, 14, 12, 0.65);position: relative; overflow: hidden; text-align: center; }
+    .philosophy::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(201,168,76,0.15) ,transparent 70%); }
     .phi-inner { position: relative; max-width: 800px; margin: 0 auto; }
-    .phi-mark { font-family: var(--serif); font-size: 8rem; color: rgba(201,168,76,0.12); line-height: 0.5; margin-bottom: 1rem; }
+    .phi-mark { font-family: var(--serif); font-size: 8rem; color: rgba(201,168,76,0.2); line-height: 0.5; margin-bottom: 1rem; }
     .phi-quote { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 300; font-style: italic; line-height: 1.55; color: var(--light); margin-bottom: 2.5rem; }
     .phi-author { font-size: 0.68rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); }
     .phi-author span { display: block; font-size: 0.6rem; color: var(--mid); letter-spacing: 0.2em; margin-top: 0.4rem; }
     /* ——— 移动端响应 ——— */
     @media (max-width: 768px) { display:none; }   </style>  </head>  <body>
-
   <!-- 顶部导航 -->
   <header class="navbar" id="navbar">
     <a href="index.html" class="logo">
@@ -111,7 +111,6 @@
       <div class="hamburger" onclick="toggleMenu()" id="hamburger"><span></span><span></span><span></span></div>
     </div>
   </header>
-
   <!-- 英雄区 -->
   <section class="hero">
     <div class="hero-bg"></div>
@@ -126,7 +125,6 @@
     </div>
     <div class="scroll-hint"><span>向下滚动</span><div class="scroll-hint-line"></div></div>
   </section>
-
   <!-- 主界面关于数据统计条的设置-->
   <section class="stats-bar">
     <div class="stats-inner">
@@ -136,7 +134,6 @@
       <div class="stat-item reveal reveal-delay-3"><div class="stat-number">【人数】</div><div class="stat-label">专业投资团队成员</div></div>
     </div>
   </section>
-
   <!-- 主界面关于我们项的设置--> 
   <div class="intro-band">
     <div class="intro-img reveal">
@@ -154,7 +151,6 @@
       <a href="关于我们.html" class="btn-ghost">了解更多</a>
     </div>
   </div>
-
   <!-- 主界面我们的策略项的设置--> 
   <section class="strategies-preview">
     <div class="inner">
@@ -187,7 +183,6 @@
       </div>
     </div>
   </section>        <!-- 策略卡片三 -->
-
     <!-- 主界面第三页核心理念项的设置--> 
   <section class="philosophy">
     <div class="phi-inner">
@@ -203,7 +198,6 @@
       </div>
     </div>
   </section>
-
   <!-- 页脚 -->
   <footer class="footer">
     <div class="footer-inner">
@@ -244,7 +238,6 @@
         </div><!-- /footer-top -->
       </div><!-- /footer-inner -->
     </footer>
-
   <script src="shared.js"></script>
   <script>
     /* 首页导航栏滚动效果（首页特殊：顶部时透明） */
