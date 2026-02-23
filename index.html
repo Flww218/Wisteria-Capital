@@ -8,6 +8,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="shared.css" />
   <style>
+  /* 新增 body 背景 */
+  body {
+    background-image: url('tree2.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
     /* ===首页专属样式==== */  /* ——— 英雄区（首屏） ——— */
     .hero {
       position: relative; height: 100vh; min-height: 600px;
@@ -15,10 +22,6 @@
     }
     .hero-bg {
       position: absolute; inset: 0; background: var(--dark-2);
-      background-image: url('tree2.png');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
     } /* 背景图片 */
     .hero-bg::before {
     content: ''; position: absolute; inset: 0;
