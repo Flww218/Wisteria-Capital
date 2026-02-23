@@ -21,8 +21,10 @@
       display: flex; align-items: center; justify-content: center; overflow: hidden;
     }
     .hero-bg {
-      position: absolute; inset: 0; background: var(--dark-2);
-    } /* 背景图片 */
+  position: absolute;
+  inset: 0;
+  background: rgba(15,14,12,0.55); 
+  }
     .hero-bg::before {
     content: ''; position: absolute; inset: 0;
     background:
@@ -54,7 +56,7 @@
     @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } } /* 入场，文字动画系统等 */
 
     /* ——— 统计数字条 ——— */
-    .stats-bar { background: rgba(15, 14, 12, 0.25); border-top: 1px solid rgba(201,168,76,0.15); border-bottom: 1px solid rgba(201,168,76,0.15); padding: 3rem 4vw; }
+    .stats-bar { background: rgba(15, 14, 12, 0.55); border-top: 1px solid rgba(201,168,76,0.15); border-bottom: 1px solid rgba(201,168,76,0.15); padding: 3rem 4vw; }
     .stats-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
     .stat-item { text-align: center; padding: 1rem; border-right: 1px solid rgba(201,168,76,0.1); }
     .stat-item:last-child { border-right: none; }
@@ -69,7 +71,7 @@
     .intro-img::before { content: ''; position: absolute; top: -20px; left: -20px; width: 70px; height: 70px; border-left: 1.5px solid rgba(201,168,76,0.3); border-top: 1.5px solid rgba(201,168,76,0.3); }
 
     /* ——— 策略预览 ——— */
-    .strategies-preview { padding: 7rem 4vw; background: rgba(10, 10, 10, 0.80); }
+    .strategies-preview { padding: 7rem 4vw; background: rgba(10, 10, 10, 0.55); }
     .strategies-preview .inner { max-width: 1200px; margin: 0 auto; }
     .preview-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
     .view-all { font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); border-bottom: 1px solid var(--gold); padding-bottom: 2px; transition: var(--transition); }
