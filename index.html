@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>【FLW】- 繁荣紫藤资本</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+  /* 新增 body 背景 */
+  body {
+    background-image: url('tree4k.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+    /* ===首页专属样式==== */  /* ——— 英雄区（首屏） ——— */
+    .hero {
+      position: relative; height: 100vh; min-height: 600px;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .hero-bg {
+  background: rgba(15,14,12,0.65); 
+  }
+    .hero-bg::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+    radial-gradient(ellipse 80% 60% at 60% 40%, rgba(201,168,76,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 80% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%),
+    linear-gradient(135deg, rgba(5,5,5,0.65) 0%, rgba(15,14,12,0.65) 100%); /* 改这里 */
+    } /* 渐变光影效果 */
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%);
+    } /* 网格纹理层 */
+    .hero-content {
+      position: relative; z-index: 2; text-align: center;
+      max-width: 900px; padding: 0 2rem;
+      animation: heroFadeIn 1.4s ease forwards;
+    } /* 内容层 */
+    @keyframes heroFadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-eyebrow { font-size: 0.65rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; animation: fadeUp 1s 0.3s both; }
+    .hero-title { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 4.5rem); font-weight: 600; line-height: 1.15; color: var(--white); margin-bottom: 1.5rem; animation: fadeUp 1s 0.5s both; }
+    .hero-title em { font-style: italic; color: var(--gold-light); font-weight: 300; }
+    .hero-sub { font-size: 1rem; font-weight: 300; color: rgba(245,240,232,0.55); margin-bottom: 3rem; animation: fadeUp 1s 0.7s both; }
+    .hero-actions { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; animation: fadeUp 1s 0.9s both; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0.5; animation: bounce 2s infinite; }
+    .scroll-hint span { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; }
+    .scroll-hint-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); }
+    @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } } /* 入场，文字动画系统等 */
+    /* ——— 统计数字条 ——— */
+    .stats-bar { background: rgba(15, 14, 12, 0.65); border-top: 1px solid rgba(201,168,76,0.15); border-bottom: 1px solid rgba(201,168,76,0.15); padding: 3rem 4vw; }
+    .stats-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+    .stat-item { text-align: center; padding: 1rem; border-right: 1px solid rgba(201,168,76,0.1); }
+    .stat-item:last-child { border-right: none; }
+    .stat-number { font-family: var(--serif); font-size: 2.8rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
+    .stat-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); }
+    /* ——— 关于我们的横幅 ——— */
+    .intro-band { padding: 7rem 4vw; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .intro-img { aspect-ratio: 4/5; position: relative; }
+    .intro-img .img-block { width: 100%; height: 100%; }
+    .intro-img::after { content: ''; position: absolute; bottom: -20px; right: -20px; width: 100px; height: 100px; border-right: 1.5px solid rgba(201,168,76,0.75); border-bottom: 1.5px solid rgba(201,168,76,0.75); }
+    .intro-img::before { content: ''; position: absolute; top: -20px; left: -20px; width: 70px; height: 70px; border-left: 1.5px solid rgba(201,168,76,0.75); border-top: 1.5px solid rgba(201,168,76,0.75); }
+    /* ——— 策略预览 ——— */
+    .strategies-preview { padding: 7rem 4vw; background: rgba(10, 10, 10, 0.65); }
+    .strategies-preview .inner { max-width: 1200px; margin: 0 auto; }
+    .preview-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+    .view-all { font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); border-bottom: 1px solid var(--gold); padding-bottom: 2px; transition: var(--transition); }
+    .view-all:hover { opacity: 0.7; }
+    .preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; }
+    .preview-card { background: var(--dark-3); padding: 3rem 2.5rem; border: 1px solid rgba(201,168,76,0.08); transition: var(--transition); cursor: pointer; position: relative; overflow: hidden; }
+    .preview-card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+    .preview-card:hover { border-color: rgba(201,168,76,0.2); }
+    .preview-card:hover::before { transform: scaleX(1); }
+    .preview-icon { width: 44px; height: 44px; border: 1px solid rgba(201,168,76,0.3); display: flex; align-items: center; justify-content: center; margin-bottom: 1.8rem; color: var(--gold); font-size: 1.2rem; }
+    .preview-name { font-family: var(--serif); font-size: 1.3rem; font-weight: 600; color: var(--white); margin-bottom: 1rem; }
+    .preview-desc { font-size: 0.82rem; line-height: 1.8; color: rgba(245,240,232,0.5); margin-bottom: 1.5rem; }
+    .preview-link { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 8px; transition: var(--transition); }
+    .preview-card:hover .preview-link::after { content: '→'; transform: translateX(6px); }
+    .preview-link::after { content: '→'; transition: transform 0.3s ease; }
+    /* ——— 理念引语 ——— */
+    .philosophy { padding: 10rem 4vw; position: relative; overflow: hidden; text-align: center; }
+    .philosophy::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(201,168,76,0.75) 0%, transparent 70%); }
+    .phi-inner { position: relative; max-width: 800px; margin: 0 auto; }
+    .phi-mark { font-family: var(--serif); font-size: 8rem; color: rgba(201,168,76,0.12); line-height: 0.5; margin-bottom: 1rem; }
+    .phi-quote { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 300; font-style: italic; line-height: 1.55; color: var(--light); margin-bottom: 2.5rem; }
+    .phi-author { font-size: 0.68rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); }
+    .phi-author span { display: block; font-size: 0.6rem; color: var(--mid); letter-spacing: 0.2em; margin-top: 0.4rem; }
+    /* ——— 移动端响应 ——— */
+    @media (max-width: 768px) { display:none; }   </style>  </head>  <body>
+
+  <!-- 顶部导航 -->
+  <header class="navbar" id="navbar">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">汉</div>
+      <div class="logo-text">_____<span>FLOURISH WISTERIA CAPITAL</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="投资策略.html">投资策略</a></li>
+      <li><a href="关于我们.html">关于我们</a></li>
+      <li><a href="核心团队.html">核心团队</a></li>
+      <li><a href="联系我们.html">联系我们</a></li>
+    </ul>
+    <div style="display:flex;gap:1rem;align-items:center;">
+      <!-- 预约沟通按钮链接到专属页面 -->
+      <a href="预约沟通.html" class="nav-cta">预约沟通</a>
+      <div class="hamburger" onclick="toggleMenu()" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </header>
+
+  <!-- 英雄区 -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">内太阳系轨道资产管理</p>
+      <h1 class="hero-title">穿越深空<br/><em>塑造长期价值</em></h1>
+      <p class="hero-sub">专注提升效率，深耕全类轨道资产领域，自2218年深耕至今</p>
+      <div class="hero-actions">
+        <a href="投资策略.html" class="btn-primary">了解投资策略</a>
+        <a href="预约沟通.html" class="btn-ghost">预约沟通</a>
+      </div>
+    </div>
+    <div class="scroll-hint"><span>向下滚动</span><div class="scroll-hint-line"></div></div>
+  </section>
+
+  <!-- 主界面关于数据统计条的设置-->
+  
+  <section class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item reveal"><div class="stat-number">【金额】</div><div class="stat-label">管理资产规模（人民币）</div></div>
+      <div class="stat-item reveal reveal-delay-1"><div class="stat-number">【年数】+</div><div class="stat-label">专注另类投资年限</div></div>
+      <div class="stat-item reveal reveal-delay-2"><div class="stat-number">【数量】</div><div class="stat-label">核心投资策略</div></div>
+      <div class="stat-item reveal reveal-delay-3"><div class="stat-number">【人数】</div><div class="stat-label">专业投资团队成员</div></div>
+    </div>
+  </section>
+
+    <!-- 主界面关于我们项的设置--> 
+  <div class="intro-band">
+    <div class="intro-img reveal">
+      <div class="img-block" style="width:100%;height:100%;">
+        <img src="treejianjie.jpg" alt="公司图片" style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+    </div>
+    <div class="reveal">
+      <p class="section-eyebrow">关于我们</p>
+      <h2 class="section-title">深耕另类资产<br/><em>探寻价值洼地</em></h2>
+      <div class="gold-divider"></div>
+      <p class="section-body">繁荣紫藤资本是一家专注于太空资产投资管理的机构，自2218年创立以来，始终坚持战略严谨、技术驱动的投资理念，致力于为投资者和高净值客户提供差异化的超额收益。</p>
+      <p class="section-body">我们相信，太空的危险性孕育着真正的机遇。通过对太阳系资源的高效利用与对社会需求基本面的广泛研究，在广袤的无人深空中寻找被市场忽视的未知价值。</p>
+      <br>
+      <a href="关于我们.html" class="btn-ghost">了解更多</a>
+    </div>
+  </div>
+
+  <!-- 主界面我们的策略项的设置--> 
+  <section class="strategies-preview">
+    <div class="inner">
+      <div class="preview-header">
+        <div>
+          <p class="section-eyebrow reveal">我们的策略</p>
+          <h2 class="section-title reveal">核心<em>投资策略</em></h2>
+        </div>
+        <a href="投资策略.html" class="view-all reveal">查看全部策略</a>
+      </div>
+      <div class="preview-grid">
+        <a href="投资策略.html" class="preview-card reveal" style="text-decoration:none;">
+          <div class="preview-icon">◈</div>
+          <h3 class="preview-name">企业控股</h3>
+          <p class="preview-desc">战略定位：掌握“轨道经济”与“月地经济”的关键基础资产。聚焦方向包括轨道能源设施，在轨维修与延寿服务，空间物流，保险业等，具备自循环与规模效应。</p>
+          <div class="preview-link">深入了解</div>
+        </a>        <!-- 策略卡片一 -->
+        <a href="投资策略.html" class="preview-card reveal reveal-delay-1" style="text-decoration:none;">
+          <div class="preview-icon">◇</div>
+          <h3 class="preview-name">对冲体系</h3>
+          <p class="preview-desc">太空企业面临的风险远高于传统产业，全天候对冲策略体系包括1.发射保险与再保险，构建新劳合社体系。2.长期发射合约锁价，签订长期运力协议，锁定成本。3.利率与汇率对冲，采用利率掉期与货币远期合约，对冲高资本开支项目的融资风险。</p>
+          <div class="preview-link">深入了解</div>
+        </a>        <!-- 策略卡片二 -->
+        <a href="投资策略.html" class="preview-card reveal reveal-delay-2" style="text-decoration:none;">
+          <div class="preview-icon">◉</div>
+          <h3 class="preview-name">轨道资产投资</h3>
+          <p class="preview-desc">以地月物流圈为核心，覆盖木星轨道以内的大多数天体，资产结构包括卫星星座，轨道运输系统，小行星勘探权等，计划通过形成“发射—运营—服务—资源”垂直整合闭环 ，使内部收益率（IRR）达到15–22% </p>
+          <div class="preview-link">深入了解</div>
+        </a>
+      </div>
+    </div>
+  </section>        <!-- 策略卡片三 -->
+
+    <!-- 主界面第三页核心理念项的设置--> 
+  <section class="philosophy">
+    <div class="phi-inner">
+      <div class="phi-mark reveal">"</div>
+      <blockquote class="phi-quote reveal">
+        我们相信，真正的投资价值并不存在于喧嚣的共识之中，<br/>
+        而是隐藏于市场的复杂性与定价偏差之内。<br/>
+        洞察力与耐心，是穿越周期的核心资产。
+      </blockquote>
+      <div class="phi-author reveal">
+        【Mr.Flww】
+        <span>【首席执行官】</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-mark">F</div>
+            <div class="footer-logo-text">【繁荣紫藤资本】</div>
+          </div>
+          <p class="footer-desc">【繁荣紫藤资本】太空的危险性孕育着真正的机遇。通过对资源的高效利用，寻找被市场忽视的未知价值。</p>
+          <div class="footer-social">
+            <a href="#" class="social-icon" title="微信">A</a>
+            <a href="#" class="social-icon" title="LinkedIn" target="_blank">B</a>
+            <a href="#" class="social-icon" title="微博">C</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-col-title">公　司</h4>
+          <ul class="footer-links">
+            <li><a href="关于我们.html">关于我们</a></li>
+            <li><a href="核心团队.html">核心团队</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">投　资</h4>
+          <ul class="footer-links">
+            <li><a href="投资策略.html">投资策略</a></li>
+            <li><a href="#">在管项目</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">联　络</h4>
+          <ul class="footer-links">
+            <li><a href="联系我们.html">联系我们</a></li>
+            <li><a href="预约沟通.html">预约沟通</a></li>
+          </ul>
+        </div>
+        </div><!-- /footer-top -->
+      </div><!-- /footer-inner -->
+    </footer>
+
+  <script src="shared.js"></script>
+  <script>
+    /* 首页导航栏滚动效果（首页特殊：顶部时透明） */
+    const navbar = document.getElementById('navbar');
+    navbar.style.background = 'linear-gradient(to bottom, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0) 100%)';
+    navbar.style.borderBottom = 'none';
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        navbar.style.background = 'rgba(10,10,10,0.97)';
+        navbar.style.borderBottom = '1px solid rgba(201,168,76,0.15)';
+      } else {
+        navbar.style.background = 'linear-gradient(to bottom, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0) 100%)';
+        navbar.style.borderBottom = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
