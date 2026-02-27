@@ -1,8 +1,5 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!DOCTYPE html><html lang="zh-CN">
+<head>  <meta charset="UTF-8" />  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>【FLW】- 繁荣紫藤资本</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
@@ -15,33 +12,27 @@
     background-position: center;
     background-attachment: fixed;
   }
-    /* ===首页专属样式==== */  /* ——— 英雄区（首屏） ——— */
+    /* ===首页专属样式====英雄区（首屏）*/
     .hero {
       position: relative; height: 100vh; min-height: 600px;
       display: flex; align-items: center; justify-content: center; overflow: hidden;
     }
     .hero-bg { background: rgba(15,14,12,0.65);  }
-
     .hero-bg::before {
     content: ''; position: absolute; inset: 0;
     background:
     radial-gradient(ellipse 80% 60% at 60% 40%, rgba(201,168,76,0.08) 0%, transparent 70%),
     radial-gradient(ellipse 50% 80% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%),
-    linear-gradient(135deg, rgba(5,5,5,0.65) 0%, rgba(15,14,12,0.65) 100%);
-    } /* 渐变光影效果 */
-
+    linear-gradient(135deg, rgba(5,5,5,0.65) 0%, rgba(15,14,12,0.65) 100%);} /* 渐变光影效果 */
     .hero-bg::after {
       content: ''; position: absolute; inset: 0;
       background-image: linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
       background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%);
-    } /* 网格纹理层 */
-
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%);} /* 网格纹理层 */
     .hero-content {
       position: relative; z-index: 2; text-align: center;
       max-width: 900px; padding: 0 2rem;
-      animation: heroFadeIn 1.4s ease forwards;
-    } /* 内容层 */
+      animation: heroFadeIn 1.4s ease forwards;} /* 内容层 */
     @keyframes heroFadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     .hero-eyebrow { font-size: 0.65rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; animation: fadeUp 1s 0.3s both; }
     .hero-title { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 4.5rem); font-weight: 600; line-height: 1.15; color: var(--white); margin-bottom: 1.5rem; animation: fadeUp 1s 0.5s both; }
@@ -91,8 +82,6 @@
     .phi-quote { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 300; font-style: italic; line-height: 1.55; color: var(--light); margin-bottom: 2.5rem; }
     .phi-author { font-size: 0.68rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); }
     .phi-author span { display: block; font-size: 0.6rem; color: var(--mid); letter-spacing: 0.2em; margin-top: 0.4rem; }
-    /* ——— 移动端响应 ——— */
-    @media (max-width: 768px) { display:none; }   </style>  </head>  <body>
   <!-- 顶部导航 -->
   <header class="navbar" id="navbar">
     <a href="index.html" class="logo">
