@@ -2,21 +2,16 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>预约沟通 — 【公司名称】</title>
+  <title>预约沟通 — 【繁荣紫藤资本】</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="shared.css" />
   <style>
-    /* ================================================
-       预约沟通页专属样式
-       ================================================ */
-
+    /* ===============预约沟通页专属样式=============== */
     /* 主体双栏布局 */
     .booking-layout { display: grid; grid-template-columns: 4fr 8fr; gap: 6rem; align-items: start; }
-
     /* ——— 左侧：说明信息 ——— */
     .booking-info {}
-
     /* 流程步骤 */
     .steps { margin-top: 2.5rem; }
     .step { display: flex; gap: 1.2rem; padding: 1.5rem 0; border-bottom: 1px solid rgba(201,168,76,0.08); }
@@ -37,18 +32,14 @@
     .cp-name { font-family: var(--serif); font-size: 1rem; color: var(--white); }
     .cp-title { font-size: 0.7rem; letter-spacing: 0.1em; color: var(--gold); margin-top: 0.2rem; }
     .cp-note { font-size: 0.75rem; line-height: 1.6; color: var(--mid); margin-top: 1rem; clear: both; }
-
     /* ——— 右侧：预约表单 ——— */
     .booking-form-wrap { background: var(--dark-3); border: 1px solid rgba(201,168,76,0.1); padding: 3.5rem; }
     .booking-title { font-family: var(--serif); font-size: 1.8rem; color: var(--white); margin-bottom: 0.5rem; }
     .booking-sub { font-size: 0.85rem; color: var(--mid); margin-bottom: 2.5rem; line-height: 1.6; }
-
     /* 双列布局 */
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
     /* 日期时间选择区 */
     .datetime-group { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
     /* 沟通方式选项 */
     .mode-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
     .mode-option { cursor: pointer; }
@@ -60,13 +51,11 @@
     .mode-card .mode-icon { font-size: 1.4rem; margin-bottom: 0.5rem; display: block; }
     .mode-option input:checked + .mode-card { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.05); }
     .mode-card:hover { border-color: rgba(201,168,76,0.3); }
-
     /* 兴趣策略复选框 */
     .checkbox-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
     .check-option { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; }
     .check-option input { accent-color: var(--gold); }
     .check-option span { font-size: 0.8rem; color: rgba(245,240,232,0.6); }
-
     /* 投资规模选择 */
     .range-options { display: flex; flex-wrap: wrap; gap: 0.6rem; }
     .range-btn {
@@ -75,15 +64,12 @@
       transition: var(--transition);
     }
     .range-btn:hover, .range-btn.selected { border-color: var(--gold); color: var(--gold); }
-
     /* 进度指示器 */
     .form-progress { display: flex; gap: 0.5rem; margin-bottom: 2.5rem; }
     .prog-step { flex: 1; height: 3px; background: rgba(201,168,76,0.1); border-radius: 2px; transition: var(--transition); }
     .prog-step.active { background: var(--gold); }
-
     /* 免责文字 */
     .booking-disclaimer { font-size: 0.68rem; color: rgba(245,240,232,0.2); line-height: 1.6; margin-top: 1.2rem; }
-
     /* 成功提示（默认隐藏） */
     .success-msg {
       display: none; text-align: center; padding: 4rem 2rem;
@@ -92,7 +78,6 @@
     .success-icon { font-size: 3rem; margin-bottom: 1.5rem; }
     .success-msg h3 { font-family: var(--serif); font-size: 1.5rem; color: var(--white); margin-bottom: 1rem; }
     .success-msg p { font-size: 0.9rem; color: var(--mid); line-height: 1.8; }
-
     @media (max-width: 1024px) {
       .booking-layout { grid-template-columns: 1fr; gap: 3rem; }
     }
@@ -104,25 +89,23 @@
   </style>
 </head>
 <body>
-
   <nav class="mobile-nav" id="mobileNav">
     <ul>
       <li><a href="index.html" onclick="toggleMenu()">首　页</a></li>
-      <li><a href="投资策略.html" onclick="toggleMenu()">投资策略</a></li>
+      <li><a href="管理策略.html" onclick="toggleMenu()">管理策略</a></li>
       <li><a href="关于我们.html" onclick="toggleMenu()">关于我们</a></li>
       <li><a href="核心团队.html" onclick="toggleMenu()">核心团队</a></li>
       <li><a href="联系我们.html" onclick="toggleMenu()">联系我们</a></li>
       <li><a href="预约沟通.html" onclick="toggleMenu()">预约沟通</a></li>
     </ul>
   </nav>
-
   <header class="navbar">
     <a href="index.html" class="logo">
-      <div class="logo-mark">汉</div>
-      <div class="logo-text">【公司名称】<span>CAPITAL MANAGEMENT</span></div>
+      <div class="logo-mark">𓍝</div>
+      <div class="logo-text">繁荣紫藤<span>FLOURISH WISTERIA CAPITAL</span></div>
     </a>
     <ul class="nav-links">
-      <li><a href="投资策略.html">投资策略</a></li>
+      <li><a href="管理策略.html">管理策略</a></li>
       <li><a href="关于我们.html">关于我们</a></li>
       <li><a href="核心团队.html">核心团队</a></li>
       <li><a href="联系我们.html">联系我们</a></li>
@@ -132,28 +115,20 @@
       <div class="hamburger" onclick="toggleMenu()" id="hamburger"><span></span><span></span><span></span></div>
     </div>
   </header>
-
   <!-- 页面顶部横幅 -->
   <section class="page-hero">
     <div class="page-hero-inner">
       <p class="page-eyebrow">开启对话</p>
       <h1 class="page-title">预约<em>沟通</em></h1>
-      <!-- 【描述】请替换 -->
-      <p class="page-desc">我们诚邀符合条件的机构投资者和高净值投资者预约一对一会面，深入了解我们的投资策略与近期机会。</p>
+      <p class="page-desc">我们诚邀有合作意向的主权实体和企业机构预约会面，深入了解我们的产品服务与近期合作机会。</p>
     </div>
   </section>
-
   <div class="content-wrap">
     <div class="booking-layout">
-
-      <!-- ================================================
-           左侧：流程说明与联系人信息
-           【请替换】联系人姓名、职位和说明文字
-           ================================================ -->
+      <!-- =======左侧：流程说明与联系人信息【请替换】联系人姓名、职位和说明文字======== -->
       <div class="booking-info reveal">
         <p class="section-eyebrow">预约流程</p>
         <h2 class="section-title">如何<em>预约</em></h2>
-
         <div class="steps">
           <div class="step">
             <div class="step-num">01</div>
@@ -166,58 +141,40 @@
             <div class="step-num">02</div>
             <div class="step-content">
               <h4>确认与准备</h4>
-              <p>我们的投资者关系团队将在 1 个工作日内与您确认时间，并视情况发送相关材料。</p>
+              <p>我们的客户关系团队将在 7 个地球日内与您确认时间，并视情况发送相关材料。</p>
             </div>
           </div>
           <div class="step">
             <div class="step-num">03</div>
             <div class="step-content">
               <h4>开展沟通</h4>
-              <p>按约定时间通过您选择的方式进行一对一会面，时长约 45-60 分钟。</p>
+              <p>按约定时间根据您的条件进行合适的会面事务，时长约 1-3 个地球日。</p>
             </div>
           </div>
         </div>
-
-        <!-- ——— 联系负责人卡片 ——— -->
-        <!-- 【请替换】负责人姓名、职位和说明文字 -->
-        <div class="contact-person" style="margin-top:2.5rem;">
-          <div class="cp-label">您的专属联系人</div>
-          <div class="cp-avatar">姓</div>
-          <!-- 【姓名】请替换 -->
-          <div class="cp-name">【负责人姓名】</div>
-          <!-- 【职位】请替换 -->
-          <div class="cp-title">投资者关系总监</div>
-          <!-- 【补充说明】请替换 -->
-          <p class="cp-note">【请填写：负责人的简短介绍，如"专注服务机构客户逾【X】年，熟悉私募股权与对冲基金产品结构"，约40字】</p>
+        <!-- ——— 联系负责人卡片 【请替换】负责人姓名、职位和说明文字 -->
+      	  <div class="contact-person" style="margin-top:2.5rem;">
+          <div class="cp-label">外交联系人I</div>
+          <div class="cp-avatar">NUT</div>
+          <div class="cp-name">【NUT-甘油三酯坚果】</div>
+          <div class="cp-title">外交部关系总监</div>
+          <p class="cp-note">【繁荣紫藤资本外交部下属的特化型AGI，作为公司中枢AI的第一级子智能，现担任本公司外交部关系总监一职。】</p>
         </div>
-
-        <!-- 注意事项 -->
         <div style="margin-top:2rem;padding:1.5rem;border:1px solid rgba(201,168,76,0.08);background:var(--dark-3);">
           <p style="font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;">重要提示</p>
-          <!-- 【投资者资格说明】请根据监管要求修改 -->
-          <p style="font-size:0.78rem;line-height:1.7;color:rgba(245,240,232,0.4);">本页面的预约服务仅面向符合相关法规定义的合格投资者。提交预约申请并不构成投资要约或承诺。所有信息将严格保密处理。</p>
+          <p style="font-size:0.78rem;line-height:1.7;color:rgba(245,240,232,0.4);">本页面的预约服务中，提交预约申请并不构成投资要约或承诺。所有信息将严格保密处理。</p>
         </div>
-
       </div><!-- /booking-info -->
-
-      <!-- ================================================
-           右侧：预约表单
-           【注意】表单提交需要后端服务
-           ================================================ -->
       <div class="booking-form-wrap reveal">
         <h2 class="booking-title">填写预约信息</h2>
-        <p class="booking-sub">所有标注 * 的字段为必填项。我们承诺在 1 个工作日内回复确认。</p>
-
+        <p class="booking-sub">所有标注 * 的字段为必填项。我们承诺在 7 个地球日内回复确认。</p>
         <!-- 进度条（视觉装饰） -->
         <div class="form-progress">
           <div class="prog-step active"></div>
           <div class="prog-step active"></div>
           <div class="prog-step"></div>
         </div>
-
-        <!-- ——— 基本信息 ——— -->
         <p style="font-size:0.62rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;">基本信息</p>
-
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">姓名 *</label>
@@ -228,26 +185,21 @@
             <input type="text" class="form-input" placeholder="您的职位（可选）" />
           </div>
         </div>
-
         <div class="form-group">
           <label class="form-label">所在机构 *</label>
-          <input type="text" class="form-input" placeholder="公司 / 机构名称" />
+          <input type="text" class="form-input" placeholder="主权实体 / 企业机构名称" />
         </div>
-
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label">电子邮箱 *</label>
-            <input type="email" class="form-input" placeholder="your@email.com" />
+            <label class="form-label">实体地址 *</label>
+            <input type="email" class="form-input" placeholder="星区/行星/位置" />
           </div>
           <div class="form-group">
-            <label class="form-label">联系电话 *</label>
-            <input type="tel" class="form-input" placeholder="+86 138 0000 0000" />
+            <label class="form-label">联系地址 *</label>
+            <input type="tel" class="form-input" placeholder="# XX AAAA AAAA AAAA" />
           </div>
         </div>
-
-        <!-- ——— 时间偏好 ——— -->
         <p style="font-size:0.62rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin:2rem 0 1.5rem;">偏好时间</p>
-
         <div class="datetime-group">
           <div class="form-group">
             <label class="form-label">首选日期 *</label>
@@ -258,7 +210,6 @@
             <input type="date" class="form-input" />
           </div>
         </div>
-
         <div class="form-group">
           <label class="form-label">偏好时段 *</label>
           <select class="form-select" style="color:rgba(245,240,232,0.5);">
@@ -271,8 +222,6 @@
             <option>下午 16:00 – 17:00</option>
           </select>
         </div>
-
-        <!-- ——— 沟通方式 ——— -->
         <div class="form-group">
           <label class="form-label">沟通方式 *</label>
           <div class="mode-options">
@@ -290,64 +239,46 @@
             </label>
           </div>
         </div>
-
-        <!-- ——— 感兴趣的策略 ——— -->
         <div class="form-group">
-          <label class="form-label">感兴趣的策略（可多选）</label>
+          <label class="form-label">感兴趣的业务（可多选）</label>
           <div class="checkbox-grid">
-            <label class="check-option"><input type="checkbox" /><span>私募股权</span></label>
-            <label class="check-option"><input type="checkbox" /><span>对冲基金</span></label>
-            <label class="check-option"><input type="checkbox" /><span>不动产投资</span></label>
-            <!-- 【策略四】请替换为您的实际策略 -->
-            <label class="check-option"><input type="checkbox" /><span>【策略四名称】</span></label>
-            <label class="check-option"><input type="checkbox" /><span>多资产配置</span></label>
-            <label class="check-option"><input type="checkbox" /><span>尚未确定</span></label>
+            <label class="check-option"><input type="checkbox" /><span>农产品交易</span></label>
+            <label class="check-option"><input type="checkbox" /><span>风险管理和流动性支援</span></label>
+            <label class="check-option"><input type="checkbox" /><span>重资产管理</span></label>
+            <label class="check-option"><input type="checkbox" /><span>物流供应</span></label>
+            <label class="check-option"><input type="checkbox" /><span>行星地球化改造</span></label>
+            <label class="check-option"><input type="checkbox" /><span>其他</span></label>
           </div>
         </div>
-
-        <!-- ——— 预计投资规模 ——— -->
-        <!-- 【请根据合规要求调整金额区间】 -->
         <div class="form-group">
-          <label class="form-label">预计投资规模（人民币）</label>
+          <label class="form-label">预计业务涉及规模（ICA）</label>
           <div class="range-options" id="rangeOptions">
-            <button class="range-btn" onclick="selectRange(this)">500万以下</button>
-            <button class="range-btn" onclick="selectRange(this)">500万 – 1000万</button>
-            <button class="range-btn" onclick="selectRange(this)">1000万 – 5000万</button>
-            <button class="range-btn" onclick="selectRange(this)">5000万以上</button>
+            <button class="range-btn" onclick="selectRange(this)">5亿以下</button>
+            <button class="range-btn" onclick="selectRange(this)">5亿 – 100亿</button>
+            <button class="range-btn" onclick="selectRange(this)">100亿 – 500亿</button>
+            <button class="range-btn" onclick="selectRange(this)">500亿以上</button>
             <button class="range-btn" onclick="selectRange(this)">暂不透露</button>
           </div>
         </div>
-
         <div class="form-group">
           <label class="form-label">沟通目的或其他说明</label>
           <textarea class="form-textarea" placeholder="请简要说明您希望在本次沟通中了解的重点内容，或其他补充信息…" style="height:100px;"></textarea>
         </div>
-
-        <!-- 提交按钮 -->
         <button type="button" class="form-submit" onclick="handleSubmit()">确　认　提　交　预　约</button>
-
-        <!-- 【免责声明】请根据合规要求修改 -->
         <p class="booking-disclaimer">
-          提交预约即表示您确认自身为合格投资者，并同意我们的隐私政策。
-          本网站内容不构成任何投资建议、要约或销售材料。
-          预约确认后，我们的团队将通过邮件或电话与您联系。
+              宇宙并不关心你的感受，它只关心熵。而我们减少它。
         </p>
       </div><!-- /booking-form-wrap -->
-
     </div><!-- /booking-layout -->
-
-    <!-- 提交成功提示（点击提交后显示） -->
     <div class="success-msg" id="successMsg">
       <div class="success-icon" style="color:var(--gold);">✓</div>
       <h3>预约申请已成功提交</h3>
-      <p style="color:var(--mid);">感谢您的预约申请。我们的投资者关系团队将在 1 个工作日内<br/>通过您提供的邮箱或电话与您确认会面安排。</p>
+      <p style="color:var(--mid);">感谢您的预约申请。我们的业务团队将在 7 个地球日内<br/>通过您提供的联系方式与您确认会面安排。</p>
       <div style="margin-top:2rem;">
-        <a href="我的投资公司网站.html" class="btn-ghost" style="display:inline-block;">返回首页</a>
+        <a href="index.html" class="btn-ghost" style="display:inline-block;">返回首页</a>
       </div>
     </div>
-
   </div><!-- /content-wrap -->
-
   <script src="shared.js"></script>
   <script>
     /* 规模按钮单选效果 */
@@ -355,7 +286,6 @@
       document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
     }
-
     /* 表单提交演示（实际部署时替换为后端提交逻辑） */
     function handleSubmit() {
       const form = document.querySelector('.booking-form-wrap');
