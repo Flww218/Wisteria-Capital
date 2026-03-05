@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>【FLW】- 繁荣紫藤资本</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    /* ===========关于我们页专属样式======== */
+    /* ——— 公司故事：图文交错 ——— */
+    .story-block {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+      padding: 5rem 0; border-bottom: 1px solid rgba(201,168,76,0.08);
+    }
+    .story-block.reverse { direction: rtl; }
+    .story-block.reverse > * { direction: ltr; }
+    .story-img { aspect-ratio: 4/3; position: relative; }
+    .story-img .img-block { width: 100%; height: 100%; }
+    .story-img .corner-tl { position: absolute; top: -15px; left: -15px; width: 60px; height: 60px; border-left: 1.5px solid rgba(201,168,76,0.3); border-top: 1.5px solid rgba(201,168,76,0.3); }
+    .story-img .corner-br { position: absolute; bottom: -15px; right: -15px; width: 60px; height: 60px; border-right: 1.5px solid rgba(201,168,76,0.3); border-bottom: 1.5px solid rgba(201,168,76,0.3); }
+    /* ——— 时间线 ——— */
+    .timeline { padding: 6rem 0; }
+    .timeline-title { font-family: var(--serif); font-size: 2rem; color: var(--white); margin-bottom: 3rem; }
+    .timeline-items { position: relative; }
+    .timeline-items::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--gold), transparent); }
+    .tl-item { display: grid; grid-template-columns: 120px 1fr; gap: 2rem; padding: 2rem 0 2rem 2rem; position: relative; }
+    .tl-item::before { content: ''; position: absolute; left: -4px; top: 2.8rem; width: 9px; height: 9px; border-radius: 50%; background: var(--gold); border: 2px solid var(--dark); }
+    .tl-year { font-family: var(--serif); font-size: 1.5rem; color: var(--gold); line-height: 1; padding-top: 0.2rem; }
+    .tl-content h3 { font-family: var(--serif); font-size: 1.1rem; color: var(--white); margin-bottom: 0.5rem; }
+    .tl-content p { font-size: 0.85rem; line-height: 1.8; color: rgba(245,240,232,0.55); }
+    /* ——— 价值观 ——— */
+    .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 3rem; }
+    .value-card { background: var(--dark-3); padding: 2.5rem 2rem; border: 1px solid rgba(201,168,76,0.08); transition: var(--transition); }
+    .value-card:hover { border-color: rgba(201,168,76,0.25); }
+    .value-icon { font-size: 1.8rem; margin-bottom: 1.2rem; }
+    .value-name { font-family: var(--serif); font-size: 1.1rem; color: var(--white); margin-bottom: 0.8rem; }
+    .value-desc { font-size: 0.8rem; line-height: 1.7; color: rgba(245,240,232,0.5); }
+    /* ——— 数据展示 ——— */
+    .milestones { background: var(--dark-3); border-top: 1px solid rgba(201,168,76,0.1); border-bottom: 1px solid rgba(201,168,76,0.1); padding: 5rem 4vw; margin: 0 -4vw; }
+    .milestones .inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; text-align: center; }
+    .ms-num { font-family: var(--serif); font-size: 2.5rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
+    .ms-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); }
+    @media (max-width: 768px) {
+      .story-block { grid-template-columns: 1fr; gap: 2.5rem; }
+      .story-block.reverse { direction: ltr; }
+      .values-grid { grid-template-columns: 1fr 1fr; }
+      .milestones .inner { grid-template-columns: 1fr; gap: 2rem; }
+      .tl-item { grid-template-columns: 80px 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="index.html" onclick="toggleMenu()">首　页</a></li>
+      <li><a href="管理业务.html" onclick="toggleMenu()">管理业务</a></li>
+      <li><a href="关于我们.html" onclick="toggleMenu()">关于我们</a></li>
+      <li><a href="核心消息.html" onclick="toggleMenu()">核心消息</a></li>
+      <li><a href="联系我们.html" onclick="toggleMenu()">联系我们</a></li>
+      <li><a href="预约沟通.html" onclick="toggleMenu()">预约沟通</a></li>
+    </ul>
+  </nav>
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">𓍝</div>
+      <div class="logo-text">繁荣紫藤<span>FLOURISH WISTERIA CAPITAL</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="管理业务.html">管理业务</a></li>
+      <li><a href="关于我们.html" class="active">关于我们</a></li>
+      <li><a href="核心消息.html">核心消息</a></li>
+      <li><a href="联系我们.html">联系我们</a></li>
+    </ul>
+    <div style="display:flex;gap:1rem;align-items:center;">
+      <a href="预约沟通.html" class="nav-cta">预约沟通</a>
+      <div class="hamburger" onclick="toggleMenu()" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </header>
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <p class="page-eyebrow">我们的故事</p>
+      <h1 class="page-title">关于<em>我们</em></h1>
+      <p class="page-desc">自2418年创立至今，繁荣紫藤资本始终相信太空的危险性孕育着真正的机遇。通过对资源的高效配置，寻找被忽视的未知需求。</p>
+    </div>
+  </section>
+  <div class="content-wrap">
+    <div class="story-block reveal">
+      <div class="story-img">
+        <div class="img-block" >
+          <img src="image/ship.png" alt="公司图片" />
+        </div>
+        <div class="corner-tl"></div><div class="corner-br"></div>
+      </div>
+      <div>
+        <p class="section-eyebrow">公司起源</p>
+        <h2 class="section-title">始于<em>一个偶然</em></h2>
+        <div class="gold-divider"></div>
+        <p class="section-body">【历史学家认为，公司真正的起源是一条殖民船。当第一批基于虫洞的恒星际殖民开始时，政府和企业投资者们最热衷的是矿业、能源、航运。只有一个财团投资农业。他们赞助五月花号殖民船，这是对17世纪那艘横渡大西洋的“Mayflower”的致敬。飞船在公元2386年起飞。但出乎意料的是——作为第四只通过虫洞的殖民船，虫洞发生了崩坏并将五月花号送往另一个世界。<br><br>殖民船通过虫洞后，发现计划中的“半宜居世界”变成了一个全新的星系：距离地球122光年的霍图斯星系，蒙上帝保佑，五月花号很快在此发现了一颗“过于理想”的行星。原生态极其繁盛。生物多样性丰富，气候稳定，资源丰富，这就是繁荣紫藤资本的总部所在地：长期承诺行星。通过对五月花号飞船的改造，殖民地诞生了第一座完全自循环农业环，它不是田野，而是轨道结构。它的管理者不是农民，而是工程师。殖民者在日志里写下：“真正的独立，从农业开始。”<br><br>三十年后，面对重新被开启的虫洞和往日故乡的通信时。殖民地已经建立起一座庞大的拥有工农业的宜居行星。长期承诺行星带来的回报率超过任何殖民项目。通过霍图斯的资源，殖民地很快建立起一家公司获取巨额的人员和技术支持，并收购了奄奄一息的旧发起者，结合双方名称特点的企业被称为：繁荣紫藤资本。从那时起，公司不再是一个支持殖民的附属机构。】</p>
+      </div>
+    </div>
+    <div class="story-block reverse reveal">
+      <div class="story-img">
+        <div class="img-block" style="width:100%;height:100%;">
+          <img src="image/company.jpg" alt="公司图片" />
+        </div>
+        <div class="corner-tl"></div><div class="corner-br"></div>
+      </div>
+      <div>
+        <p class="section-eyebrow">企业结构</p>
+        <h2 class="section-title">精简层级<br/><em>实体自治</em></h2>
+        <div class="gold-divider"></div>
+                <p class="section-body">【企业架构采用三层管理层级：控股主体以产量、增长率、资源转换效率等数据为主要指标，并为子公司和友好合作者提供流动性和先进技术支持以及安全保障。恒星区子公司以恒星系为单位，作为单一控股单元，拥有独立财务与能源预算权，负责市场开拓，产品销售和供应链维护。轨道产业实体如独立的轨道殖民地、农业环、生态改造殖民舰等，都可随时剥离或转移。】</p>
+        <p class="section-body">【我们相信时间是我们的合伙人。】</p>
+      </div>
+    </div>
+    <div class="milestones reveal">
+      <div class="inner">
+        <div>
+          <div class="ms-num">【7.5万】亿+</div>
+          <div class="ms-label">当前合计管理规模（ICA）</div>
+        </div>
+        <div>
+          <div class="ms-num">【4.7】%</div>
+          <div class="ms-label">企业成立以来年化净回报</div>
+        </div>
+        <div>
+          <div class="ms-num">【100】行星+</div>
+          <div class="ms-label">长期合作伙伴</div>
+        </div>
+      </div>
+    </div>
+    <div class="timeline">
+      <h2 class="timeline-title reveal">发展<em style="font-style:italic;color:var(--gold-light);font-weight:300;">历程</em></h2>
+      <div class="timeline-items">
+        <div class="tl-item reveal">
+          <div class="tl-year">【2386年】</div>
+          <div class="tl-content">
+            <h3>【五月花号殖民船启航】</h3>
+            <p></p>
+          </div>
+        </div>
+        <div class="tl-item reveal reveal-delay-1">
+          <div class="tl-year">【2418年】</div>
+          <div class="tl-content">
+            <h3>【繁荣紫藤的建立】</h3>
+            <p></p>
+          </div>
+        </div>
+        <div class="tl-item reveal reveal-delay-2">
+          <div class="tl-year">【2552年】</div>
+          <div class="tl-content">
+            <h3>【成功改造荒芜行星普罗米托】</h3>
+            <p></p>
+          </div>
+        </div>
+        <div class="tl-item reveal reveal-delay-3">
+          <div class="tl-year">【2667年】</div>
+          <div class="tl-content">
+            <h3>【夕阳行星十一日战争】</h3>
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div><!-- /content-wrap -->
+  <script src="shared.js"></script>
+</body>
+</html>

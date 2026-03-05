@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>【FLW】- 繁荣紫藤资本</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    /* ============核心消息页专属样式============== */
+    /* 团队分组标题 */
+    .team-group { margin-bottom: 5rem; }
+    .group-label { font-size: 0.62rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); margin-bottom: 2.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(201,168,76,0.12); }
+    /* 团队成员网格 */
+    .members-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+    .members-grid.senior { grid-template-columns: repeat(3, 1fr); }
+    /* 成员卡片 */
+    .member-card { cursor: pointer; }
+    /* 【头像容器】请为每位成员填入头像图片 */
+    .member-avatar {
+      width: 100%; aspect-ratio: 3/4;
+      background: var(--dark-3); border: 1px solid rgba(201,168,76,0.1);
+      margin-bottom: 1.2rem; position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition);
+    }
+    .member-avatar:hover { border-color: rgba(201,168,76,0.3); }
+    /* 悬停叠加层，显示简介 */
+    .member-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.2) 60%, transparent 100%);
+      opacity: 0; transition: var(--transition);
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem;
+    }
+    .member-card:hover .member-overlay { opacity: 1; }
+    /* 悬停时显示的简介文字 */
+    .member-bio-short { font-size: 0.75rem; line-height: 1.6; color: rgba(245,240,232,0.8); }
+    /* 头像占位符 */
+    .avatar-initial {
+      font-family: var(--serif); font-size: 2.5rem; font-weight: 300;
+      color: rgba(201,168,76,0.2); position: relative; z-index: 1;
+    }
+    /* 姓名与职位 */
+    .member-name { font-family: var(--serif); font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 0.25rem; }
+    .member-title { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+    .member-edu { font-size: 0.72rem; color: var(--mid); }
+    /* 领英图标 */
+    .member-linkedin {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.62rem; letter-spacing: 0.15em; color: rgba(201,168,76,0.6);
+      margin-top: 0.5rem; transition: var(--transition);
+    }
+    .member-linkedin:hover { color: var(--gold); }
+    /* 高级合伙人展示（大图横幅） */
+    .senior-member {
+      display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: start;
+      padding: 3rem; background: var(--dark-3); border: 1px solid rgba(201,168,76,0.1);
+      margin-bottom: 1.5px; transition: var(--transition);
+    }
+    .senior-member:hover { border-color: rgba(201,168,76,0.25); }
+    .senior-avatar {
+      aspect-ratio: 3/4; background: var(--dark-2); border: 1px solid rgba(201,168,76,0.1);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .senior-initial { font-family: var(--serif); font-size: 3rem; font-weight: 300; color: rgba(201,168,76,0.2); }
+    .senior-name { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; color: var(--white); margin-bottom: 0.3rem; }
+    .senior-title { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+    .senior-bio { font-size: 0.85rem; line-height: 1.9; color: rgba(245,240,232,0.6); margin-bottom: 1.2rem; }
+    .senior-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+    .tag { font-size: 0.62rem; letter-spacing: 0.15em; padding: 4px 12px; border: 1px solid rgba(201,168,76,0.2); color: var(--mid); }
+    @media (max-width: 1024px) {
+      .members-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .members-grid, .members-grid.senior { grid-template-columns: repeat(2, 1fr); }
+      .senior-member { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="index.html" onclick="toggleMenu()">首　页</a></li>
+      <li><a href="管理业务.html" onclick="toggleMenu()">管理业务</a></li>
+      <li><a href="关于我们.html" onclick="toggleMenu()">关于我们</a></li>
+      <li><a href="核心消息.html" onclick="toggleMenu()">核心消息</a></li>
+      <li><a href="联系我们.html" onclick="toggleMenu()">联系我们</a></li>
+      <li><a href="预约沟通.html" onclick="toggleMenu()">预约沟通</a></li>
+    </ul>
+  </nav>
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">𓍝</div>
+      <div class="logo-text">繁荣紫藤<span>FLOURISH WISTERIA CAPITAL</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="管理业务.html">管理业务</a></li>
+      <li><a href="关于我们.html">关于我们</a></li>
+      <li><a href="核心消息.html" class="active">核心消息</a></li>
+      <li><a href="联系我们.html">联系我们</a></li>
+    </ul>
+    <div style="display:flex;gap:1rem;align-items:center;">
+      <a href="预约沟通.html" class="nav-cta">预约沟通</a>
+      <div class="hamburger" onclick="toggleMenu()" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </header>
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <p class="page-eyebrow">勇气、希望、理性</p>
+      <h1 class="page-title">核心<em>消息</em></h1>
+      <p class="page-desc">进步永无止境，我们亦是如此。探索繁荣紫藤的最新资讯和近期动态。</p>
+    </div>
+  </section>
+  <div class="content-wrap">
+    <div class="team-group">
+      <div class="group-label reveal">重要事件</div>
+      <div class="senior-member reveal">
+        <div class="senior-avatar">
+         <img src="image/sj1.png" alt="【重要事件2】" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <div>
+          <h2 class="senior-name">【王之森行星太空港对接城生态穹顶一期工程竣工】</h2>
+          <div class="senior-title">生态改造 & 城市建设</div>
+          <p class="senior-bio">【由繁荣紫藤主导建设的“王之森行星太空港对接城生态穹顶一期工程”于本周期正式完成结构闭合与系统联调，标志着该行星基础生态支持体系进入稳定运行阶段。<br>本期工程涵盖：直径32公里复合型生态穹顶，与轨道农业环直连的物资输送枢纽，可容纳1200万标准人口的低维护居住模块，三层闭环水循环与气体调控系统.穹顶采用自修复复合材料与分区气候编译架构，可在高辐射与低温波动环境下维持稳定生态参数。所有核心设施已接入行星级产能调度网络，实现与太空港货运系统的无缝对接。<br>项目负责人表示：“王之森行星作为拥有超过100亿人口的超级行星兼繁荣紫藤重要盟友新巴黎共和国的首都，经济和政治意义毋庸置疑。根据规划，二期工程将扩展工业-农业混合区，并进一步提高行星运行效率。王之森行星预计将在未来十个标准年内完成更全面功能化阶段的转型。”<br>企业方面强调，本项目属于“百手巨人计划”的关键节点之一，其目标并非单纯扩展居住面积，而是建立可持续、可预测、可复制的行星级运行模型。】</p>
+          <div class="senior-tags">
+            <span class="tag">【20天前】</span>
+            <span class="tag">【王之森行星 & 地表建设部】</span>
+          </div>
+          <a href="#" class="member-linkedin" target="_blank">▶ 了解详情</a>
+        </div>
+      </div>
+      <div class="senior-member reveal">
+        <div class="senior-avatar">
+        <img src="image/sj2.jpg" alt="【重要事件2】" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <div>
+          <h2 class="senior-name">【探险队在亨廷斯星系一气态行星的卫星上发现外星文明的遗迹】</h2>
+          <div class="senior-title">地外文明 & 生态建筑</div>
+          <p class="senior-bio">【本周期，由星际食物联合体资源与边界评估探险队在亨廷斯星系一颗气态行星第三卫星执行常规矿产与水冰储量测绘任务时，发现疑似非人类起源的大型结构遗迹。该卫星原被归类为低重力、无大气、无生命迹象的资源型目标体。初步勘测显示，遗迹结构嵌入地表岩层，具规则几何排列特征，并包含未知合金残片与非自然能量衰减痕迹。<br>技术评估报告指出：结构规模约12公里，材料成分与现有已知合金体系不匹配，遗迹年代初步推算超过30万标准年。<br>项目负责人表示：“该发现不影响当前农业生产部署计划。但我们已暂停该卫星的资源开采活动。公司已启动三级审慎协议：1. 封锁区域并建立轨道监测。2. 调用独立材料分析舰。3. 启动文明风险评估模型。”<br>企业声明强调，现阶段无证据表明该遗迹存在活跃结构或运行系统，也未检测到信号发射行为。根据内部程序，此类发现将被纳入数据库，并接受跨部门风险分析，包括：潜在技术价值，不可预测文明接触概率，对区域战略资产安全的影响。公司未对遗迹性质作出公开推断。<br>目前，该卫星仍围绕其母气态行星稳定运行，它或许曾见证过一次文明的终结。现在，它被纳入产能规划之外。】</p>
+          <div class="senior-tags">
+            <span class="tag">【1个月前】</span>
+            <span class="tag">【无与伦比a行星 & 科考部】</span>
+          </div>
+          <a href="#" class="member-linkedin" target="_blank">▶ 了解详情</a>
+        </div>
+      </div>
+    </div>
+    <!-- ====== 投资团队（小卡片网格）【请替换】每位成员的姓名、职位、头像和简介可根据实际人数增减卡片======== -->
+    <div class="team-group">
+      <div class="group-label reveal">最新消息</div>
+      <div class="members-grid">
+        <div class="member-card reveal">
+          <div class="member-avatar">
+           <img src="image/sj3.jpg" alt="【事件3】" style="width:100%;height:100%;object-fit:cover;" />
+            <div class="member-overlay">
+              <p class="member-bio-short">【A-R177号农业环已完成最终系统联调与产能压力测试，于本周期正式进入连续生产状态。<br>该农业环部署于赫尔墨斯a行星同步轨道，是企业的第177号标准化农业环形结构单元。<br>A-R177号农业环主要参数如下：环体直径：28公里，有效种植面积：约3,400平方公里，年设计产能：满足900万标准人口基础粮食需求。农业环已接入行星生态穹顶与太空港物流网络。<br>项目工程总监在简短说明中表示：“我们没有庆祝，它只是按计划完成。”】</p>
+            </div>
+          </div>
+          <div class="member-name">【A-R177号农业环收获第一批农作物】</div>
+          <div class="member-title">【6小时前】</div>
+          <div class="member-edu">【赫尔墨斯a行星 & 农业部】</div>
+          <a href="#" class="member-linkedin" target="_blank">详情</a>
+        </div>
+        <!-- 成员卡二 -->
+        <div class="member-card reveal reveal-delay-1">
+          <div class="member-avatar">
+ 	    <img src="image/sj4.jpg" alt="【事件4】" style="width:100%;height:100%;object-fit:cover;" />
+            <div class="member-overlay">
+              <p class="member-bio-short">【在本次于地球举行的全星系奥林匹克赛马会决赛中，紫藤代表队获得团体总分第一名，成为本届赛事冠军。<br>本届赛事覆盖235个恒星系统，共计412支代表队参与。紫藤代表队在长程轨道耐力赛与低重力精准操控项目中表现稳定，最终以综合评分领先0.7个百分点完成比赛，裁判委员会表示，紫藤代表队在复杂轨道环境下的协同控制能力表现突出。<br>企业公共事务部发布简要声明：“稳定的体能与稳定的供应曲线同样重要，祝贺团队。”<br>赛事闭幕式上，紫藤代表队发表		庆祝演说，并以标准礼仪完成交接程序。】</p>
+            </div>
+          </div>
+          <div class="member-name">【紫藤代表队在全星系奥林匹克赛马会中夺冠】</div>
+          <div class="member-title">【3天前】</div>
+          <div class="member-edu">【地球 & 文化部】</div>
+          <a href="#" class="member-linkedin" target="_blank">详情</a>
+        </div>
+        <!-- 成员卡三 -->
+        <div class="member-card reveal reveal-delay-2">
+          <div class="member-avatar">
+ 	    <img src="image/sj5.jpg" alt="【事件5】" style="width:100%;height:100%;object-fit:cover;" />
+            <div class="member-overlay">
+              <p class="member-bio-short">【公司探索部门于本周期完成对亨廷斯星系外围区域的一次常规引力异常扫描，在一颗气态巨行星第四卫星上确认存在具备生态改造潜力的地质与轨道条件。技术部门评估认为，通过部署轨道农业环与大气编译系统，可在20–35个标准年内实现Ⅰ级农业适配改造。项目代号已确定为：LCP-H4（行星候选体-亨廷斯4号）<br>企业声明：“该目标体不具备原生复杂生态，改造风险处于可接受区间。”<br>根据财务测算，该卫星可在建成后第18个标准年实现正向现金流。】</p>
+            </div>
+          </div>
+          <div class="member-name">【公司探索部门发现一颗有潜在生态改造价值的气态巨行星卫星】</div>
+          <div class="member-title">【7天前】</div>
+          <div class="member-edu">【林仙座a-2行星 & 行星部】</div>
+          <a href="#" class="member-linkedin" target="_blank">详情</a>
+        </div>
+        <!-- 成员卡四 -->
+        <div class="member-card reveal reveal-delay-3">
+          <div class="member-avatar">
+ 	    <img src="image/sj6.jpg" alt="【事件6】" style="width:100%;height:100%;object-fit:cover;" />
+            <div class="member-overlay">
+              <p class="member-bio-short">【A/L-C24号柱状世界于本周期完成结构应力校准与角动量注入程序，正式进入稳定自转状态。首批职业工人已按计划入驻核心居住区。A/L-C24为集团首批大尺度柱状生态结构之一。该结构全长86公里，内径6.4公里，通过受控自转形成标准重力环境，用于农业扩展与工业支持双重功能。<br>工程总负责人在简短通告中表示：“自转开始，即视为可持续运行。”<br>企业方面强调，柱状世界的设计目标并非替代行星，而是作为高密度、可移动的生产与居住模块，为未来跨星系部署提供标准化模板。】</p>
+            </div>
+          </div>
+          <div class="member-name">【A/L-C24号柱状世界启动自转，第一批职业工人已经入住】</div>
+          <div class="member-title">【11天前】</div>
+          <div class="member-edu">【波江座a奥尔特云 & 行星部】</div>
+          <a href="#" class="member-linkedin" target="_blank">详情</a>
+        </div>
+      </div>
+    </div><!-- /投资团队 -->
+    <!-- =============================运营与支持团队== -->
+    <div class="team-group">
+      <div class="group-label reveal">最新消息</div>
+      <div class="members-grid">
+        <div class="member-card reveal">
+          <div class="member-avatar">
+             <img src="image/sj7.jpg" alt="【事件7】" style="width:100%;height:100%;object-fit:cover;" />
+            <div class="member-overlay"><p class="member-bio-short">【首都第三赤道市华盛顿大道在例行压力调节过程中出现短时无害橙色气体外逸。经检测，泄漏气体为标准生态穹顶调节用惰性混合气体，对人体健康及生态系统运行无实质影响。<br>事件处理进展如下：空气质量指数维持在安全范围，未造成人员伤亡或设施损毁。调查显示，泄漏原因为阀门密封组件老化，相关组件已完成替换。<br>企业城市管理部门表示：“环境参数始终处于可控区间，未触发ai应急协议。”<br>城市公共事务部门提醒市民：尽量避让华盛顿大道，正常通勤不受影响。】</p></div>
+          </div>
+          <div class="member-name">【首都第三赤道市华盛顿大道发生无害气体泄漏】</div>
+          <div class="member-title">【14天前】</div>
+          <div class="member-edu">【长期承诺行星 & 检察部】</div>
+        </div>
+        <div class="member-card reveal reveal-delay-1">
+          <div class="member-avatar">
+             <img src="image/sj8.jpg" alt="【事件8】" style="width:100%;height:100%;object-fit:cover;" />
+            <div class="member-overlay"><p class="member-bio-short">【探索舰队已完成对盾牌218X恒星的第一阶段近距离勘测，确认该区域为大规模人工结构残骸，符合“戴森云”工程特征。此前该异常被归类为尘埃带密集区，现已确认遮蔽来源为离散结构单元残片。模型推算：遗迹存在时间不少于120万标准年。探索区域已划为三级受控区，暂缓资源开采。<br>企业声明：“能源结构本身不构成威胁，未知变量才构成风险。”<br>公司强调，当前发现不影响既定农业部署计划。盾牌218X系统仍不在短期扩张优先序列内。】</p></div>
+          </div>
+          <div class="member-name">【对盾牌218x恒星的戴森云遗迹的初步考察结果】</div>
+          <div class="member-title">【18天前】</div>
+          <div class="member-edu">【盾牌218x恒星 & 科考部】</div>
+        </div>
+        <div class="member-card reveal reveal-delay-2">
+          <div class="member-avatar">
+             <img src="image/sj9.jpg" alt="【事件9】" style="width:100%;height:100%;object-fit:cover;" />
+            <div class="member-overlay"><p class="member-bio-short">【位于三重弧光行星的最大城市——首都人口正式突破一千万大关，成为该行星首个千万级人口规模的超大型都市。<br>城市管理部门表示，首都城的基础设施系统目前运行稳定。<br>规划委员会指出，千万级人口突破意味着进入“高密度运行阶段”。未来城市发展重点将转向：1. 空间利用效率优化。2. 自动化服务系统升级。3. 人口生产力优化。<br>人口战略研究部门发表声明：“人口不是压力变量，人口是重要成就。”<br>据预测，三重弧光首都城将在未来20个标准年内继续保持人口稳定增长。】</p></div>
+          </div>
+          <div class="member-name">【三重弧光行星最大城市的人口突破一千万】</div>
+          <div class="member-title">【22天前】</div>
+          <div class="member-edu">【三重弧光行星 & 当地市政府】</div>
+        </div>
+        <div class="member-card reveal reveal-delay-3">
+          <div class="member-avatar">
+             <img src="image/sj10.jpg" alt="【事件10】" style="width:100%;height:100%;object-fit:cover;" />
+            <div class="member-overlay"><p class="member-bio-short">【琴月行星轨道太空电梯上层支撑桁架系统已完成最终模块化安装与结构应力测试，标志着该行星超级运输系统进入高层运行准备阶段。本次部署的上层桁架位于太空电梯结构的高轨稳定区。<br>总工程师表示：“太空电梯不是运输设施，它是行星与轨道工业体系之间的神经通路。”<br>根据运行规划，太空电梯系统将逐步开放高密度货运与人员输送服务，预计将在未来8个标准年内将轨道工业与地表农业产能连接效率提升至300%以上。】</p></div>
+          </div>
+          <div class="member-name">【琴月行星轨道的太空电梯上面层桁架部署完成】</div>
+          <div class="member-title">【1个月前】</div>
+          <div class="member-edu">【琴月行星 & 行星部】</div>
+        </div>
+      </div>
+    </div><!-- /运营团队 -->
+    <!-- 职位招募 CTA -->
+    <div style="text-align:center;padding:4rem 0 2rem;border-top:1px solid rgba(201,168,76,0.1);" class="reveal">
+      <p class="section-eyebrow" style="margin-bottom:1rem;">繁荣紫藤</p>
+      <h2 class="section-title" style="margin-bottom:1rem;">与我们共同<em>创造卓越</em></h2>
+      <p style="font-size:0.9rem;color:var(--mid);margin-bottom:2rem;">我们始终在创造兼具卓越分析能力与长期主义的企业能力。</p>
+      <a href="联系我们.html" class="btn-primary">查看更多相关消息</a>
+    </div>
+  </div><!-- /content-wrap -->
+  <script src="shared.js"></script>
+</body>
+</html>

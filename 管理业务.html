@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>【FLW】- 繁荣紫藤资本</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    /* ========= 投资业务页专属样式======= */  /* 业务卡片大网格 */
+    .strategy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 4rem; }
+    /* 每张业务卡片 */
+    .strategy-card {
+      background: var(--dark-3); border: 1px solid rgba(201,168,76,0.08);
+      padding: 3rem 2.5rem; transition: var(--transition); position: relative; overflow: hidden;
+    }
+    .strategy-card::before {
+      content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px;
+      background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+    }
+    .strategy-card:hover { border-color: rgba(201,168,76,0.2); }
+    .strategy-card:hover::before { transform: scaleX(1); }
+    /* 图标占位 */
+    .s-icon { width: 50px; height: 50px; border: 1px solid rgba(201,168,76,0.3); display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; color: var(--gold); font-size: 1.4rem; }
+    .s-tag { font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
+    .s-name { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; color: var(--white); margin-bottom: 1.2rem; }
+    .s-desc { font-size: 0.85rem; line-height: 1.9; color: rgba(245,240,232,0.55); margin-bottom: 2rem; }
+    /* 特点列表 */
+    .s-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem; }
+    .s-features li { font-size: 0.78rem; color: rgba(245,240,232,0.5); display: flex; align-items: flex-start; gap: 0.7rem; }
+    .s-features li::before { content: '—'; color: var(--gold); flex-shrink: 0; }
+    /* 关键指标行 */
+    .s-metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; padding-top: 1.5rem; border-top: 1px solid rgba(201,168,76,0.1); }
+    .s-metric-val { font-family: var(--serif); font-size: 1.4rem; color: var(--gold); }
+    .s-metric-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); margin-top: 0.2rem; }
+    /* 详情展开提示 */
+    .s-more { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-top: 1.5rem; display: inline-flex; align-items: center; gap: 8px; }
+    .s-more::after { content: '→'; transition: transform 0.3s; }
+    .strategy-card:hover .s-more::after { transform: translateX(6px); }
+    /* 宽卡片（横向跨两列） */
+    .strategy-card.wide { grid-column: span 3; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .strategy-card.wide .s-right { display: flex; flex-direction: column; justify-content: space-between; }
+    /* 底部 CTA 横幅 */
+    .cta-band { background: var(--dark-3); border: 1px solid rgba(201,168,76,0.12); padding: 5rem 4rem; text-align: center; margin-top: 4rem; position: relative; overflow: hidden; }
+    .cta-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(201,168,76,0.05) 0%, transparent 70%); }
+    .cta-band h2 { font-family: var(--serif); font-size: 2rem; color: var(--white); margin-bottom: 1rem; position: relative; }
+    .cta-band p { font-size: 0.9rem; color: var(--mid); margin-bottom: 2rem; position: relative; }
+    .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; }
+    @media (max-width: 1024px) {
+      .strategy-grid { grid-template-columns: 1fr 1fr; }
+      .strategy-card.wide { grid-column: span 2; }
+    }
+    @media (max-width: 768px) {
+      .strategy-grid { grid-template-columns: 1fr; }
+      .strategy-card.wide { grid-column: auto; grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">𓍝</div>
+      <div class="logo-text">繁荣紫藤<span>FLOURISH WISTERIA CAPITAL</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="管理业务.html" class="active">管理业务</a></li>
+      <li><a href="关于我们.html">关于我们</a></li>
+      <li><a href="核心消息.html">核心消息</a></li>
+      <li><a href="联系我们.html">联系我们</a></li>
+    </ul>
+    <div style="display:flex;gap:1rem;align-items:center;">
+      <a href="预约沟通.html" class="nav-cta">预约沟通</a>
+      <div class="hamburger" onclick="toggleMenu()" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </header>
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <p class="page-eyebrow">核心能力</p>
+      <h1 class="page-title">管理业务</h1>
+      <p class="page-desc">我们构建了多元互补的管理业务体系，在控制下行风险的前提下，系统性捕捉市场定价错误所带来的超额收益机会。</p>
+    </div>
+  </section>
+  <div class="content-wrap">
+    <div class="strategy-grid">
+      <div class="strategy-card reveal">
+        <div class="s-icon">◈</div>
+        <p class="s-tag">业务一</p>
+        <h2 class="s-name">农产品供应</h2>
+        <p class="s-desc">【本公司已推出适用于不同需求和环境的众多农业体系供应计划：1.设计部署于G型与K型恒星光谱的主粮系列，基因适配多重辐射环境，单位面积产出为地球农业峰值的17倍。2.轨道零重力蛋白架构培养的高密度蛋白系统，跳过畜牧环节，氮利用率接近100%。 3.适应红矮星低光谱的极端环境作物，具备辐射高波动抗性，适用于冻土与真空边界农业。】</p>
+        <ul class="s-features">
+          <li>【特点一：多光谱适配能力,可简化后勤压力】</li>
+          <li>【特点二：工业级闭环生产，损耗趋近于0】</li>
+          <li>【特点三：冗余与安全并行，饥荒源于脆弱，我们拒绝脆弱】</li>
+        </ul>
+        <div class="s-metrics">
+          <div><div class="s-metric-val">【16.4%】</div><div class="s-metric-label">营收占比</div></div>
+          <div><div class="s-metric-val">【11.2%】</div><div class="s-metric-label">利润占比</div></div>
+        </div>
+        <div class="s-more">了解更多</div>
+      </div>
+      <div class="strategy-card reveal reveal-delay-1">
+        <div class="s-icon">◇</div>
+        <p class="s-tag">业务二</p>
+        <h2 class="s-name">风险对冲体系</h2>
+        <p class="s-desc">【太空农业面对巨大的自然和政治风险，我们的应对做法非常简单：1.产能分散配置在大量恒星系，300%的低维护产能冗余设计，阻断风险的传播路径。2.长期物流供应合约，签订长期运力协议，锁定成本。3.构建多元货币互换体系，采用利率掉期与货币远期合约，对冲各主权实体的政治风险。】</p>
+        <ul class="s-features">
+          <li>【特点一：结构化分散，而非简单分布】</li>
+          <li>【特点二：金融工具即时防御系统，特化人工智能管理的主权风险自动调节敞口】</li>
+          <li>【特点三：能源价格锁定模型，运输运力协议和自动匹配供给算法】</li>
+        </ul>
+        <div class="s-metrics">
+          <div><div class="s-metric-val">【13.5%】</div><div class="s-metric-label">营收占比</div></div>
+          <div><div class="s-metric-val">【22.9%】</div><div class="s-metric-label">利润占比</div></div>
+        </div>
+        <div class="s-more">了解更多</div>
+      </div>
+      <div class="strategy-card reveal reveal-delay-2">
+        <div class="s-icon">◉</div>
+        <p class="s-tag">业务三</p>
+        <h2 class="s-name">重资产投资管理</h2>
+        <p class="s-desc">【农业环、行星改造、轨道蛋白工厂等战略性资产——可通过自修复结构和太阳能工业来实现零损失翻新，以此达到折旧周期300–1000年，超过90%的重资产均可短时间内重新部署至其他恒星系，所有核心设施将按计划实现被动防御能力。同时始终具备设计和建造能力，努力改善投入回报比。】</p>
+        <ul class="s-features">
+          <li>【特点一：耐心资产模型，资产不会老化，只会在闭环翻新中不断升级】</li>
+          <li>【特点二：可移动的重资产，优先迁移资产】</li>
+          <li>【特点三：保留内生建造能力，维持独立工业舰队和自主设计生产】</li>
+        </ul>
+        <div class="s-metrics">
+          <div><div class="s-metric-val">【21.7%】</div><div class="s-metric-label">营收占比</div></div>
+          <div><div class="s-metric-val">【23.2%】</div><div class="s-metric-label">利润占比</div></div>
+        </div>
+        <div class="s-more">了解更多</div>
+      </div>
+      <div class="strategy-card wide reveal">
+        <div class="s-left">
+          <div class="s-icon">⊕</div>
+          <p class="s-tag">旗舰业务</p>
+          <h2 class="s-name">行星生态圈改造</h2>
+          <p class="s-desc">【行星生态圈改造，是指：在保留轨道结构与核心物理参数的前提下，通过恒星能量调控、气体重构、生物基因编译与闭环生态设计，将目标行星转化为可控、可扩展、高产出的功能型生态单元。】</p>
+          <ul class="s-features">
+            <li>【Ⅰ级：农业适配改造，大气成分调节至标准种植比例，水循环稳定化，微生物生态重构，周期：5–20年】</li>
+            <li>【Ⅱ级：工业-农业混合生态，部分区域工业化，轨道农业环与地表系统联动，自动化能源-营养闭环，周期：20–50年】</li>
+            <li>【Ⅲ级：全生态重写，重构原生生物链，基因层面删除不可控物种，生态系统完全由算法维护，周期：50–120年】</li>
+          </ul>
+          <div class="s-more" style="margin-top:1rem;">了解更多</div>
+        </div>
+        <div class="s-right">
+        <div class="img-block" style="flex:1;min-height:280px;">
+  	    <img src="image/planet1.jpg" 
+      		     alt="策略示意图" 
+ 	             style="width:100%; height:100%; object-fit:contain;">
+	</div>
+          </div>
+          <div class="s-metrics" style="margin-top:1.5rem;">
+            <div><div class="s-metric-val">【40%】+</div><div class="s-metric-label">营收占比</div></div>
+            <div><div class="s-metric-val">【40%】+</div><div class="s-metric-label">利润占比</div></div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /strategy-grid -->
+    <div class="cta-band reveal">
+      <h2>希望了解适合您的业务？</h2>
+      <p>我们的团队将根据您的目标和风险偏好，为您提供专属的业务方案。</p>
+      <div class="cta-actions">
+        <a href="预约沟通.html" class="btn-primary">预约沟通</a>
+        <a href="联系我们.html" class="btn-ghost">发送咨询</a>
+      </div>
+    </div>
+  </div><!-- /content-wrap -->
+  <script src="shared.js"></script>
+</body>
+</html>
